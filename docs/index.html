@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sonic Growth v4 | Lavanya Sharda (A25305223171) | Amity University Mohali</title>
+<title>Sonic Growth v2 | Lavanya Sharda (A25305223171) | Amity University Mohali</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -19,8 +19,6 @@
   --rust: #B85C3C;
   --rule: #8A8478;
   --ghost: rgba(17,16,16,0.06);
-  --ai-accent: #6BA583;
-  --alert: #D97757;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -116,640 +114,2483 @@ body {
 .page.active { display: block; }
 
 /* ═══════════════════════════════
-   PAGE: DASHBOARD (REFACTORED FOR AI)
+   PAGE: PROJECT
 ═══════════════════════════════ */
 
-#page-dashboard {
-  padding: 44px 0 0 0;
-}
-
-.dashboard-container {
+/* Cover spread */
+.cover {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 24px;
-  padding: 40px;
-  max-width: 1400px;
-  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  height: calc(100vh - 44px);
+  border-bottom: 1px solid var(--ink);
 }
 
-.dashboard-main {
+.cover-left {
+  background: var(--ink);
+  padding: 64px 56px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-}
-
-/* Data entry form */
-.entry-form {
-  background: var(--paper-warm);
-  border: 1px solid var(--rule);
-  padding: 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 20px;
-  align-items: end;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-family: 'Courier Prime', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  font-weight: 700;
-}
-
-.form-group input {
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  padding: 8px 12px;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: var(--sage);
-  background: #fff;
-}
-
-.btn-primary {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 8px 24px;
-  background: var(--sage-dark);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-primary:hover {
-  background: var(--sage);
-}
-
-.btn-secondary {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 8px 16px;
-  background: transparent;
-  color: var(--ink-soft);
-  border: 1px solid var(--rule);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-secondary:hover {
-  background: var(--ghost);
-  border-color: var(--ink-soft);
-}
-
-/* Charts grid */
-.charts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-}
-
-.chart-card {
-  background: var(--paper-warm);
-  border: 1px solid var(--rule);
-  padding: 24px;
-}
-
-.chart-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  color: var(--ink-soft);
-}
-
-.chart-container {
+  justify-content: space-between;
   position: relative;
-  height: 240px;
+  overflow: hidden;
 }
 
-/* Stats rows */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 24px 0;
-  border-top: 1px solid var(--rule);
+.cover-left-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=900&q=80&fit=crop');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  mix-blend-mode: luminosity;
 }
 
-.stat-card {
+/* Typographic texture behind */
+.cover-left-type-bg {
+  position: absolute;
+  top: -20px; left: -10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 420px;
+  line-height: 0.85;
+  color: rgba(255,255,255,0.025);
+  pointer-events: none;
+  letter-spacing: -10px;
+  white-space: nowrap;
+}
+
+.cover-eyebrow {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sage);
+  position: relative;
+  z-index: 1;
+}
+
+.cover-display {
+  position: relative;
+  z-index: 1;
+}
+
+.cover-display-main {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(88px, 11vw, 148px);
+  line-height: 0.88;
+  letter-spacing: -3px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.cover-display-main .line-italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.75em;
+  color: var(--sage);
+  display: block;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.cover-caption {
+  position: relative;
+  z-index: 1;
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  max-width: 320px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 20px;
+}
+
+.cover-right {
+  background: var(--paper-warm);
+  padding: 64px 56px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  border-left: 1px solid var(--ink);
+  position: relative;
 }
 
-.stat-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 2px;
+.cover-right-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--ink-soft);
+  font-weight: 700;
 }
 
-.stat-value {
+.cover-problem {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(20px, 2.6vw, 32px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--ink);
+  border-left: 3px solid var(--sage-dark);
+  padding-left: 24px;
+}
+
+.cover-meta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border-top: 1px solid var(--ink);
+  margin: 0 -56px -64px;
+}
+
+.cover-meta-cell {
+  background: var(--paper-warm);
+  padding: 20px 24px;
+}
+
+.cover-meta-num {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
-  font-size: 28px;
+  font-size: 38px;
   line-height: 1;
   color: var(--sage-dark);
 }
 
-.stat-trend {
+.cover-meta-label {
   font-family: 'Courier Prime', monospace;
   font-size: 12px;
-  color: var(--rule);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 3px;
+  font-weight: 700;
 }
 
-/* Data log table */
-.log-section {
-  margin-top: 32px;
+/* ─── CHAPTER DIVIDER ─── */
+.chapter {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
 }
 
-.log-title {
+.chapter-num {
+  padding: 20px 0 20px 28px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+}
+
+.chapter-title-wrap {
+  padding: 20px 28px;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.chapter-tag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  font-weight: 700;
+}
+
+.chapter-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 28px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  color: var(--ink);
+}
+
+/* ─── GRID LAYOUTS ─── */
+.spread {
+  display: grid;
+  border-bottom: 1px solid var(--rule);
+}
+.spread-2 { grid-template-columns: 1fr 1fr; }
+.spread-3 { grid-template-columns: 1fr 1fr 1fr; }
+.spread-12 { grid-template-columns: 1fr 2fr; }
+.spread-21 { grid-template-columns: 2fr 1fr; }
+
+.col {
+  padding: 48px 44px;
+  border-right: 1px solid var(--rule);
+}
+.col:last-child { border-right: none; }
+.col.ink { background: var(--ink); color: #fff; }
+.col.warm { background: var(--paper-warm); }
+.col.sage-col { background: var(--sage-pale); }
+.col.full { border-right: none; }
+
+.col-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.col.ink .col-label { color: rgba(255,255,255,0.6); }
+
+.col-label::before {
+  content: '';
+  display: block;
+  width: 16px; height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.col-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.col.ink .col-heading { color: #fff; }
+
+.body-text {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+.col.ink .body-text { color: rgba(255,255,255,0.75); }
+
+/* ─── PULLQUOTE ─── */
+.pullquote-band {
+  background: var(--ink);
+  padding: 72px 80px;
+  border-bottom: 1px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.pullquote-band-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1400&q=80&fit=crop');
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.12;
+  mix-blend-mode: luminosity;
+}
+
+.pullquote-band::before {
+  content: '\201C';
+  position: absolute;
+  top: -48px; left: 52px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 360px;
+  color: rgba(122,158,126,0.1);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.pullquote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 1.4;
+  color: #fff;
+  max-width: 820px;
+  position: relative;
+  z-index: 1;
+}
+
+.pullquote-text em {
+  font-style: normal;
+  color: var(--sage);
+}
+
+.pullquote-attr {
+  margin-top: 28px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── DATA TABLE ─── */
+.data-tbl {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-tbl th {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 12px 16px 12px 0;
+  text-align: left;
+  border-bottom: 2px solid var(--ink);
+  font-weight: 700;
+}
+
+.data-tbl td {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 13px 16px 13px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.5;
   color: var(--ink-soft);
 }
 
-#logArea {
+.data-tbl tr:last-child td { border-bottom: none; }
+
+.pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 1px solid currentColor;
+  font-family: 'Courier Prime', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.pill-sage { color: var(--sage-dark); }
+.pill-rust { color: var(--rust); }
+.pill-ink  { color: var(--ink); }
+.pill-grey { color: var(--ink-soft); }
+
+/* ─── EDIPT ─── */
+.edipt-band {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+}
+
+.edipt-cell {
+  padding: 44px 32px;
+  border-right: 1px solid var(--rule);
+  cursor: default;
+  transition: background 0.25s;
+}
+.edipt-cell:last-child { border-right: none; }
+.edipt-cell:hover { background: var(--ink); }
+
+.edipt-ltr {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 0.9;
+  color: var(--paper-warm);
+  -webkit-text-stroke: 1.5px var(--rule);
+  margin-bottom: 20px;
+  transition: -webkit-text-stroke-color 0.25s, color 0.25s;
+  letter-spacing: -2px;
+}
+.edipt-cell:hover .edipt-ltr {
+  color: transparent;
+  -webkit-text-stroke-color: var(--sage);
+}
+
+.edipt-word {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 10px;
+  transition: color 0.25s;
+  font-weight: 700;
+}
+.edipt-cell:hover .edipt-word { color: var(--sage); }
+
+.edipt-desc {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  transition: color 0.25s;
+}
+.edipt-cell:hover .edipt-desc { color: rgba(255,255,255,0.75); }
+
+/* ─── INTERVIEW CARDS ─── */
+.interviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+
+.interview {
+  padding: 44px 36px;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.interview:last-child { border-right: none; }
+
+.interview-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 64px;
+  color: var(--sage-pale);
+  -webkit-text-stroke: 1px var(--rule);
+  line-height: 1;
+}
+
+.interview-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--ink);
+  flex: 1;
+}
+
+.interview-who {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.interview-insight {
+  padding: 12px 16px;
+  background: var(--sage-pale);
+  border-left: 3px solid var(--sage-dark);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sage-dark);
+  line-height: 1.5;
+}
+
+/* ─── BIG TYPE ACCENT ─── */
+.type-accent {
+  padding: 60px 56px;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  position: relative;
+}
+
+.type-accent-bg {
+  position: absolute;
+  inset: -20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 280px;
+  line-height: 1;
+  color: var(--ghost);
+  letter-spacing: -8px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.type-accent-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.stat-block {
+  padding: 0 32px 0 0;
+  border-right: 1px solid var(--rule);
+  margin-right: 32px;
+}
+.stat-block:last-child { border-right: none; margin-right: 0; }
+
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 4.5vw, 64px);
+  line-height: 1;
+  color: var(--sage-dark);
+}
+
+.stat-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+/* ─── OBSERVATION PARAMS ─── */
+.param-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  border-bottom: 1px solid var(--rule);
+}
+
+.param-cell {
+  padding: 36px 32px;
+  border-right: 1px solid var(--rule);
+}
+.param-cell:last-child { border-right: none; }
+.param-cell:nth-child(n+5) { border-top: 1px solid var(--rule); }
+
+.param-icon {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.param-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.param-detail {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ─── DATA OBSERVATION TABLE ─── */
+.obs-wrap { overflow-x: auto; }
+
+.obs-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Courier Prime', monospace;
+  font-size: 11.5px;
+}
+
+.obs-tbl th {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--ink);
+  white-space: nowrap;
+}
+
+.obs-tbl th.a { color: var(--sage-dark); }
+.obs-tbl th.b { color: var(--rust); }
+.obs-tbl th.meta { color: var(--ink); }
+
+.obs-tbl td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.obs-tbl tr:nth-child(even) td { background: var(--paper-warm); }
+
+.health-dot {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+.health-dot span {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.h5 { background: var(--sage-dark); }
+.h4 { background: var(--sage); }
+.h3 { background: #c9b84a; }
+.h2 { background: #d07040; }
+.h1 { background: var(--rust); }
+.h0 { background: var(--rule); border: 1px solid var(--rule); }
+
+/* ─── VISUAL EXPERIMENTS ─── */
+.exp-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+
+.exp-col {
+  padding: 48px 36px;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+}
+.exp-col:last-child { border-right: none; background: var(--ink); }
+
+.exp-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 110px;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rule);
+  margin-bottom: 24px;
+  letter-spacing: -4px;
+}
+.exp-col:last-child .exp-n { -webkit-text-stroke-color: rgba(255,255,255,0.08); }
+
+.exp-type {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.exp-col:last-child .exp-type { color: var(--sage); }
+
+.exp-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.exp-col:last-child .exp-title { color: #fff; }
+
+.exp-body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  flex: 1;
+}
+.exp-col:last-child .exp-body { color: rgba(255,255,255,0.7); }
+
+.exp-visual {
+  margin-top: 24px;
+  padding: 18px;
+  background: var(--paper-warm);
+  border-top: 1px solid var(--rule);
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--sage-dark);
+  white-space: pre;
+}
+
+.exp-col:last-child .exp-visual {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--sage);
+}
+
+/* ─── VISUAL MAPPING TABLE ─── */
+.map-tbl {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.map-tbl th {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 12px 20px 12px 0;
+  text-align: left;
+  border-bottom: 2px solid var(--ink);
+  color: var(--ink);
+}
+
+.map-tbl td {
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 14px 20px 14px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.map-tbl td:first-child { font-weight: 600; }
+.map-tbl tr:last-child td { border-bottom: none; }
+
+/* ─── WAVEFORM CANVAS ─── */
+#waveCanvas {
+  width: 100%;
+  display: block;
+  background: transparent;
+}
+
+/* ─── SITE FOOTER ─── */
+.site-footer {
+  background: var(--ink);
+  padding: 48px 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px;
+  border-top: 2px solid var(--sage-dark);
+}
+
+.footer-section-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.footer-body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════
+   PAGE: DASHBOARD
+═══════════════════════════════ */
+
+.dash-wrap {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: calc(100vh - 44px);
+}
+
+.dash-sidebar {
+  background: var(--ink);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: sticky;
+  top: 44px;
+  height: calc(100vh - 44px);
+  overflow-y: auto;
+}
+
+.dash-sidebar-head {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.dash-sidebar-head span { color: var(--sage); }
+
+.dash-sidebar-sub {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.form-section {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sage);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  font-weight: 700;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-lbl {
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  font-weight: 700;
+}
+
+.form-ctrl {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  padding: 8px 12px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 11.5px;
+  border-radius: 1px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.form-ctrl:focus { border-color: var(--sage); }
+.form-ctrl option { background: #111; }
+
+.day-box {
+  text-align: center;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1px;
+}
+
+.day-box-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 52px;
+  color: var(--sage);
+  line-height: 1;
+}
+
+.day-box-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.action-btn {
+  border: none;
+  padding: 11px 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: background 0.2s, color 0.2s;
+  width: 100%;
+}
+
+.action-btn-primary { background: var(--sage-dark); color: #fff; }
+.action-btn-primary:hover { background: var(--sage); }
+.action-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.3);
+  font-size: 11px;
+  padding: 9px 0;
+}
+.action-btn-ghost:hover {
+  border-color: var(--sage);
+  color: var(--sage);
+}
+
+/* Dashboard main */
+.dash-main {
+  background: var(--paper);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  overflow-y: auto;
+}
+
+.dash-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.dash-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.dash-h span { color: var(--sage-dark); }
+
+.dash-meta {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.kpi {
+  background: var(--paper);
+  padding: 22px 20px;
+  position: relative;
+}
+
+.kpi::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--sage-dark);
+}
+
+.kpi.red::after { background: var(--rust); }
+.kpi.grey::after { background: var(--rule); }
+
+.kpi-lbl {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.kpi-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 1;
+  color: var(--sage-dark);
+}
+
+.kpi.red .kpi-val { color: var(--rust); }
+.kpi.grey .kpi-val { color: var(--ink-soft); }
+
+.kpi-unit {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.kpi-delta {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.up { color: var(--sage-dark); }
+.dn { color: var(--rust); }
+
+.score-bar-wrap { margin-top: 4px; }
+.score-bar {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.score-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--sage-dark);
+  transition: width 0.5s ease;
+}
+.score-bar-fill.mid { background: #c9b84a; }
+.score-bar-fill.low { background: var(--rust); }
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.chart-block {
+  background: var(--paper);
+  padding: 24px;
+}
+
+.chart-block.full { grid-column: 1 / -1; }
+
+.chart-lbl {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-family: 'Courier Prime', monospace;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.legend-swatch {
+  width: 12px; height: 2px;
+}
+
+canvas { max-height: 240px; }
+
+.corr-band {
+  background: var(--ink);
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+}
+
+.corr-cell {
+  text-align: center;
+  padding: 0 20px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.corr-cell:last-child { border-right: none; }
+
+.corr-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1;
+  color: rgba(255,255,255,0.7);
+}
+
+.corr-val.highlight { color: var(--sage); }
+
+.corr-lbl {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.log-panel {
   background: var(--paper-warm);
   border: 1px solid var(--rule);
-  overflow-x: auto;
+  padding: 24px;
 }
 
 .log-tbl {
   width: 100%;
   border-collapse: collapse;
   font-family: 'Courier Prime', monospace;
-  font-size: 12px;
-}
-
-.log-tbl thead {
-  background: var(--ghost);
-  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
 }
 
 .log-tbl th {
-  text-align: left;
-  padding: 12px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   font-weight: 700;
-  color: var(--ink-soft);
-  letter-spacing: 0.5px;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--ink);
+  color: rgba(17,16,16,0.3);
 }
 
 .log-tbl td {
-  padding: 12px;
-  border-bottom: 1px solid var(--ghost);
-  color: var(--ink);
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
 }
 
-.log-tbl tbody tr:hover {
-  background: rgba(122, 158, 126, 0.04);
-}
+.log-tbl tr:nth-child(even) td { background: var(--paper); }
 
 .empty {
-  padding: 32px;
   text-align: center;
-  color: var(--rule);
-  font-style: italic;
-}
-
-/* ─── AI INSIGHTS SIDEBAR ─── */
-.ai-insights {
-  position: sticky;
-  top: 84px;
-  background: var(--sage-pale);
-  border: 2px solid var(--sage-dark);
-  padding: 20px;
-  height: fit-content;
-  max-height: 90vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.ai-insights-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 2px solid var(--sage-dark);
-  padding-bottom: 12px;
-}
-
-.ai-icon {
-  width: 20px;
-  height: 20px;
-  background: var(--sage-dark);
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+  padding: 48px;
   font-family: 'Courier Prime', monospace;
   font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(17,16,16,0.2);
+}
+
+/* ═══════════════════════════════
+   PAGE: PRESENTATION
+═══════════════════════════════ */
+
+.pres-cover {
+  height: calc(100vh - 44px);
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.pres-cover-left {
+  padding: 72px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.pres-cover-left-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=900&q=80&fit=crop');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.14;
+  mix-blend-mode: luminosity;
+}
+
+/* Grid overlay */
+.pres-cover-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(122,158,126,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122,158,126,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.pres-slide-eyebrow {
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--sage);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.pres-slide-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(80px, 10vw, 130px);
+  line-height: 0.87;
+  letter-spacing: -3px;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.pres-slide-title .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.2);
+}
+
+.pres-slide-title .sage { color: var(--sage); }
+
+.pres-cover-meta {
+  display: flex;
+  gap: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+  z-index: 1;
+}
+
+.pres-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pres-meta-lbl {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
   font-weight: 700;
 }
 
-.ai-insights-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
+.pres-meta-val {
+  font-family: 'Barlow', sans-serif;
   font-size: 14px;
-  letter-spacing: 1px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+}
+
+.pres-cover-right {
+  background: var(--sage-pale);
+  padding: 72px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pres-cover-right-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  color: var(--sage-dark);
+  font-weight: 700;
+}
+
+.pres-cover-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--ink);
+  border-left: 3px solid var(--sage-dark);
+  padding-left: 24px;
+}
+
+/* Pres slides = scrollable editorial */
+.pres-slide {
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+
+.pres-slide-inner {
+  padding: 72px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.slide-bg-num {
+  position: absolute;
+  top: -24px; right: 40px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 200px;
+  line-height: 1;
+  color: var(--ghost);
+  pointer-events: none;
+  letter-spacing: -6px;
+}
+
+.slide-tag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.slide-h {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(48px, 6.5vw, 88px);
+  line-height: 0.9;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+  max-width: 700px;
+}
+
+.slide-body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 640px;
+}
+
+.slide-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+
+.slide-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-top: 36px;
+}
+
+.slide-3cell {
+  background: var(--paper);
+  padding: 28px 24px;
+}
+
+.slide-3cell.ink-cell {
+  background: var(--ink);
+}
+
+.slide-stat-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1;
   color: var(--sage-dark);
 }
 
-.ai-content {
-  font-family: 'Barlow', sans-serif;
+.slide-stat-lbl {
+  font-family: 'Courier Prime', monospace;
   font-size: 13px;
-  line-height: 1.6;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.slide-stat-body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-top: 14px;
+}
+
+.slide-callout {
+  padding: 28px 36px;
+  background: var(--paper-warm);
+  border-left: 4px solid var(--sage-dark);
+  margin-top: 32px;
+}
+
+.slide-callout-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.5;
   color: var(--ink);
+}
+
+.slide-callout-text em { font-style: normal; color: var(--sage-dark); }
+
+/* Experiment set in presentation */
+.pres-exp-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 36px;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.pres-exp-cell {
+  background: var(--paper);
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.ai-content p {
-  margin: 0;
+.pres-exp-cell:last-child { background: var(--ink); }
+
+.pres-exp-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rule);
+  letter-spacing: -2px;
 }
 
-.ai-loading {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-style: italic;
-  color: var(--sage-dark);
-}
+.pres-exp-cell:last-child .pres-exp-n { -webkit-text-stroke-color: rgba(255,255,255,0.1); }
 
-.ai-loading-dot {
-  width: 4px;
-  height: 4px;
-  background: var(--sage-dark);
-  border-radius: 50%;
-  animation: bounce 1.4s infinite;
-}
-
-.ai-loading-dot:nth-child(1) { animation-delay: -0.32s; }
-.ai-loading-dot:nth-child(2) { animation-delay: -0.16s; }
-
-@keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-.ai-insight-item {
-  background: rgba(255, 255, 255, 0.6);
-  border-left: 3px solid var(--sage-dark);
-  padding: 12px;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.ai-insight-label {
+.pres-exp-type {
   font-family: 'Courier Prime', monospace;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--sage-dark);
-  margin-bottom: 4px;
-}
-
-.ai-refresh-btn {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 8px 12px;
-  background: var(--sage-dark);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  transition: background 0.2s;
-  margin-top: 8px;
-}
-
-.ai-refresh-btn:hover {
-  background: var(--sage);
-}
-
-.ai-refresh-btn:disabled {
-  background: var(--rule);
-  cursor: not-allowed;
-}
-
-/* Alert styling */
-.ai-alert {
-  background: rgba(217, 119, 87, 0.15);
-  border-left-color: var(--alert);
-  color: var(--rust);
-}
-
-.ai-alert .ai-insight-label {
-  color: var(--rust);
-}
-
-/* ─── SETTINGS PAGE ─── */
-.settings-section {
-  max-width: 600px;
-  padding: 40px;
-  margin: 0 auto;
-}
-
-.settings-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 32px;
-  color: var(--ink-soft);
-}
-
-.settings-group {
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 24px;
-}
-
-.settings-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
   font-size: 13px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 12px;
-  color: var(--ink-soft);
-  display: block;
+  color: var(--sage-dark);
+  font-weight: 700;
 }
+.pres-exp-cell:last-child .pres-exp-type { color: var(--sage); }
 
-.settings-input {
-  width: 100%;
-  font-family: 'Courier Prime', monospace;
-  font-size: 13px;
-  padding: 12px;
-  border: 1px solid var(--rule);
-  background: var(--paper-warm);
-  color: var(--ink);
-  margin-bottom: 8px;
+.pres-exp-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
+.pres-exp-cell:last-child .pres-exp-title { color: #fff; }
 
-.settings-input:focus {
-  outline: none;
-  border-color: var(--sage);
-  background: #fff;
-}
-
-.settings-hint {
+.pres-exp-body {
   font-family: 'Barlow', sans-serif;
-  font-size: 12px;
-  color: var(--rule);
-  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.pres-exp-cell:last-child .pres-exp-body { color: rgba(255,255,255,0.65); }
+
+/* Closing slide */
+.pres-closing {
+  min-height: 60vh;
+  background: var(--ink);
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
 }
 
-.settings-note {
-  background: var(--sage-pale);
-  border-left: 3px solid var(--sage-dark);
-  padding: 16px;
-  margin-top: 16px;
-  font-size: 13px;
+.pres-closing-img {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=1600&q=80&fit=crop');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  mix-blend-mode: luminosity;
+}
+
+.pres-closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(122,158,126,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122,158,126,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.pres-closing-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(52px, 8vw, 108px);
+  line-height: 0.9;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: #fff;
+  max-width: 860px;
+  position: relative;
+  z-index: 1;
+}
+
+.pres-closing-big .outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.15);
+}
+
+.pres-closing-big .sage { color: var(--sage); }
+
+.pres-closing-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.3);
+  max-width: 480px;
   line-height: 1.6;
+  position: relative;
+  z-index: 1;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .dashboard-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .ai-insights {
-    position: static;
-    max-height: none;
-  }
+/* ─── UTILITIES ─── */
+.rule-top { border-top: 1px solid var(--ink); }
+.rule-bottom { border-bottom: 1px solid var(--rule); }
+.mt-sm { margin-top: 12px; }
+.mt-md { margin-top: 24px; }
+.mt-lg { margin-top: 40px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(16px); }
+  to   { opacity:1; transform: translateY(0); }
 }
 
-@media (max-width: 640px) {
-  .dashboard-container {
-    padding: 20px;
-    gap: 16px;
-  }
-  
-  .entry-form {
-    grid-template-columns: 1fr;
-  }
-  
-  .charts-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .log-tbl {
-    font-size: 11px;
-  }
-  
-  .log-tbl th, .log-tbl td {
-    padding: 8px;
-  }
+.page.active .cover,
+.page.active .pres-cover {
+  animation: fadeUp 0.5s ease both;
 }
 </style>
 </head>
 <body>
 
-<!-- Navigation -->
+<!-- NAV -->
 <nav id="site-nav">
   <div class="nav-wordmark">
-    <div class="nav-wordmark-title">Sonic Growth</div>
-    <div class="nav-wordmark-dot"></div>
-    <div style="margin-left: 16px; font-family: 'Barlow', sans-serif; font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 1px;">Lavanya Sharda | A25305223171</div>
+    <span class="nav-wordmark-title">Sonic Growth</span>
+    <span class="nav-wordmark-dot"></span>
+    <span style="margin-left: 16px; font-family: 'Barlow', sans-serif; font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 1px;">Lavanya Sharda | A25305223171</span>
   </div>
   <div class="nav-tabs">
-    <a href="#" class="nav-tab active" onclick="switchTab('dashboard', this); return false;">Dashboard</a>
-    <a href="#" class="nav-tab" onclick="switchTab('settings', this); return false;">Settings</a>
+    <a class="nav-tab active" onclick="switchTab('project',this)">Project</a>
+    <a class="nav-tab" onclick="switchTab('dashboard',this)">Dashboard</a>
+    <a class="nav-tab" onclick="switchTab('presentation',this)">Presentation</a>
   </div>
-  <div class="nav-right">v4 · AI Correlation Engine</div>
+  <div class="nav-right">DTU · HCI · Phase 3</div>
 </nav>
 
-<!-- DASHBOARD PAGE -->
-<div id="page-dashboard" class="page active">
-  <div class="dashboard-container">
-    <!-- Main content area -->
-    <div class="dashboard-main">
-      <!-- Data Entry Form -->
-      <div class="entry-form">
-        <div class="form-group">
-          <label for="dayNum">Day</label>
-          <input type="number" id="dayNum" value="1" min="1">
-        </div>
-        <div class="form-group">
-          <label for="aDroop">Plant A Droop (0–3)</label>
-          <input type="number" id="aDroop" value="0" min="0" max="3">
-        </div>
-        <div class="form-group">
-          <label for="aDb">Plant A dB</label>
-          <input type="number" id="aDb" value="80">
-        </div>
-        <div class="form-group">
-          <label for="aLux">Plant A Lux</label>
-          <input type="number" id="aLux" value="3000">
-        </div>
-        <div class="form-group">
-          <label for="bDroop">Plant B Droop (0–3)</label>
-          <input type="number" id="bDroop" value="0" min="0" max="3">
-        </div>
-        <div class="form-group">
-          <label for="bDb">Plant B dB</label>
-          <input type="number" id="bDb" value="48">
-        </div>
-        <div class="form-group">
-          <label for="bLux">Plant B Lux</label>
-          <input type="number" id="bLux" value="180">
-        </div>
-        <div class="form-group">
-          <label for="mood">Mood (1–5)</label>
-          <input type="number" id="mood" value="3" min="1" max="5">
-        </div>
-        <button class="btn-primary" onclick="logEntry()">Log Entry</button>
-        <button class="btn-secondary" onclick="loadSample()">Load Sample</button>
-      </div>
+<!-- ═══════════════ PROJECT ═══════════════ -->
+<div id="page-project" class="page active">
 
-      <!-- Charts Grid -->
-      <div class="charts-grid">
-        <div class="chart-card">
-          <div class="chart-title">Plant Droop Over Time</div>
-          <div class="chart-container">
-            <canvas id="droopChart"></canvas>
-          </div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">Sound Levels (dB)</div>
-          <div class="chart-container">
-            <canvas id="dbChart"></canvas>
-          </div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">Observer Mood</div>
-          <div class="chart-container">
-            <canvas id="moodChart"></canvas>
-          </div>
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-left">
+      <div class="cover-left-img" aria-hidden="true"></div>
+      <div class="cover-left-type-bg" aria-hidden="true">SG</div>
+      <div class="cover-eyebrow">Human–Nature Connection · Phases 1–3</div>
+      <div class="cover-display">
+        <div class="cover-display-main">
+          Sonic<br>
+          <span class="line-italic">Growth</span>
         </div>
       </div>
-
-      <!-- Stats Section -->
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-label">Plant A Avg Droop</div>
-          <div class="stat-value" id="aAvgDroop">—</div>
-          <div class="stat-trend" id="aDroopDelta"></div>
+      <div class="cover-caption">
+        Two plants. One week. A parallel observation of how urban sound environments shape plant health — and human mood — in the same direction.
+      </div>
+    </div>
+    <div class="cover-right">
+      <div class="cover-right-label">Research Question</div>
+      <div class="cover-problem">
+        "Do urban sound environments affect plant health and human mood in the same direction — and can a 7-day parallel observation show it?"
+      </div>
+      <div class="cover-meta-row">
+        <div class="cover-meta-cell">
+          <div class="cover-meta-num">7</div>
+          <div class="cover-meta-label">Days Observed</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Plant B Avg Droop</div>
-          <div class="stat-value" id="bAvgDroop">—</div>
-          <div class="stat-trend" id="bDroopDelta"></div>
+        <div class="cover-meta-cell">
+          <div class="cover-meta-num">4</div>
+          <div class="cover-meta-label">Variables Tracked</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Plant A Sonic Score</div>
-          <div class="stat-value" id="aScore">—</div>
+        <div class="cover-meta-cell">
+          <div class="cover-meta-num">2.4</div>
+          <div class="cover-meta-label">Avg Awareness /5</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Plant B Sonic Score</div>
-          <div class="stat-value" id="bScore">—</div>
+        <div class="cover-meta-cell">
+          <div class="cover-meta-num">Apr 14</div>
+          <div class="cover-meta-label">Data Start</div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Data Log -->
-      <div class="log-section">
-        <div class="log-title">Entry Log</div>
-        <div id="logArea" class="empty">No entries yet</div>
+  <!-- EDIPT -->
+  <div class="chapter">
+    <div class="chapter-num">01</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Framework</span>
+      <span class="chapter-title">EDIPT Design Process</span>
+    </div>
+  </div>
+
+  <div class="edipt-band">
+    <div class="edipt-cell">
+      <div class="edipt-ltr">E</div>
+      <div class="edipt-word">Empathize</div>
+      <div class="edipt-desc">Field observations, 3 interviews, stakeholder mapping. Who lives with plants. Who lives with noise. Where they overlap.</div>
+    </div>
+    <div class="edipt-cell">
+      <div class="edipt-ltr">D</div>
+      <div class="edipt-word">Derive</div>
+      <div class="edipt-desc">Synthesise into a focused problem statement grounded in phytoacoustics and urban noise data from Delhi.</div>
+    </div>
+    <div class="edipt-cell">
+      <div class="edipt-ltr">I</div>
+      <div class="edipt-word">Ideate</div>
+      <div class="edipt-desc">Three directions explored — dashboard, analog journal, frequency poster. Public tracker chosen as most impactful.</div>
+    </div>
+    <div class="edipt-cell">
+      <div class="edipt-ltr">P</div>
+      <div class="edipt-word">Prototype</div>
+      <div class="edipt-desc">Three visual experiments. This HTML is the digital prototype — designed to function as an actual public tool.</div>
+    </div>
+    <div class="edipt-cell">
+      <div class="edipt-ltr">T</div>
+      <div class="edipt-word">Test</div>
+      <div class="edipt-desc">Usability test with plant owners. Hypothesis reversal — swap environments in Week 2. Does the trend invert?</div>
+    </div>
+  </div>
+
+  <!-- Empathize -->
+  <div class="chapter">
+    <div class="chapter-num">02</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Phase 2 — Empathize</span>
+      <span class="chapter-title">Field Interviews</span>
+    </div>
+  </div>
+
+  <div class="interviews">
+    <div class="interview">
+      <div class="interview-n">01</div>
+      <div class="interview-q">"I have plants on my balcony. They've never lasted more than two months. I blamed the heat, the dust. But the trucks go all night. I never once thought it could be the noise."</div>
+      <div class="interview-who">Mr. Sharma · 52 · Retired · Near Rohini highway</div>
+      <div class="interview-insight">Urban noise is already affecting outcomes — users have no data to explain why.</div>
+    </div>
+    <div class="interview">
+      <div class="interview-n">02</div>
+      <div class="interview-q">"I play music near my plants constantly. I assumed it was good for them — you know, like talking to them. But I've never checked. My money plant does look a bit sad near the speaker."</div>
+      <div class="interview-who">Priya S. · 24 · Design Student · Delhi</div>
+      <div class="interview-insight">Users assume music = positive. Volume and frequency are not considered at all.</div>
+    </div>
+    <div class="interview">
+      <div class="interview-n">03</div>
+      <div class="interview-q">"Phytoacoustics is real — plants respond to vibration at a cellular level. Stomata open and close depending on sound frequency. The science is solid. Nobody's visualised it for a general audience."</div>
+      <div class="interview-who">Anika T. · 19 · Biology Student · DTU</div>
+      <div class="interview-insight">Science exists. No accessible visualization. This is the design gap.</div>
+    </div>
+  </div>
+
+  <!-- Stats + Pullquote -->
+  <div style="height:320px;overflow:hidden;border-bottom:1px solid var(--ink);position:relative;">
+    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1600&q=80&fit=crop&crop=center" alt="Abstract plant sound visualization" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:saturate(0.6) contrast(1.1);">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(17,16,16,0.5) 0%, transparent 50%, rgba(17,16,16,0.3) 100%);"></div>
+    <div style="position:absolute;bottom:32px;left:56px;font-family:'Courier Prime',monospace;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);font-weight:700;">Apr 14–20 · Delhi · Two Plants · One Week</div>
+  </div>
+
+  <div class="type-accent">
+    <div class="type-accent-bg" aria-hidden="true">DB</div>
+    <div class="type-accent-content">
+      <div class="stat-block">
+        <div class="stat-num">74%</div>
+        <div class="stat-label">Indian cities exceed<br>WHO noise limit (55 dB)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">2.4</div>
+        <div class="stat-label">Avg. public awareness<br>score out of 5 (survey)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">+0.87</div>
+        <div class="stat-label">Correlation: lo-fi exposure<br>vs plant growth (7 days)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">82 dB</div>
+        <div class="stat-label">Avg. Delhi street noise<br>(exceeds stomatal threshold)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pullquote-band">
+    <div class="pullquote-band-img" aria-hidden="true"></div>
+    <div class="pullquote-text">The same sonic environment that stresses your plant is <em>stressing you</em>. The data just makes it visible.</div>
+    <div class="pullquote-attr">— Sonic Growth · Research Insight · April 2025</div>
+  </div>
+
+  <!-- Research -->
+  <div class="chapter">
+    <div class="chapter-num">03</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Phase 2 — Research</span>
+      <span class="chapter-title">Secondary Sources & Case Studies</span>
+    </div>
+  </div>
+
+  <div class="spread spread-2">
+    <div class="col">
+      <div class="col-label">Phytoacoustics</div>
+      <div class="col-heading">Sound is biology.</div>
+      <div class="body-text">
+        Sound waves create micro-vibrations in plant cell walls. At 100–500 Hz — the range of most music — these vibrations accelerate metabolic activity and cell division. South Korean RDA (2007) found rice exposed to specific sound frequencies showed up to 15% faster growth.<br><br>
+        At high-frequency noise above 80 dB — the average Delhi street — plant stress responses activate: stomata close, CO₂ absorption drops, photosynthesis slows. The plant does not die from the noise. It closes itself off from the world.
+      </div>
+    </div>
+    <div class="col warm">
+      <div class="col-label">Existing Solutions — What's Missing</div>
+      <div class="col-heading">No tool for everyday people.</div>
+      <div class="body-text mt-sm">
+        <strong>PlantWave</strong> converts plant bioelectrical signals into music. Direction: plant → human. Not our problem to solve.<br><br>
+        <strong>IKEA #BullyAPlant (2018)</strong> proved plants react to sonic/emotional environment. Viral, but no data tool followed.<br><br>
+        <strong>Harvestgeist</strong> mapped plant responses to urban data — academic project, never public-facing.<br><br>
+        <strong style="color:var(--sage-dark)">Gap identified:</strong> No accessible, public tool for logging sound environment alongside plant health and watching the correlation emerge in real time.
+      </div>
+    </div>
+  </div>
+
+  <!-- Survey -->
+  <div class="chapter">
+    <div class="chapter-num">04</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Phase 2 — Primary Data</span>
+      <span class="chapter-title">Public Survey — Awareness Score</span>
+    </div>
+  </div>
+
+  <div class="spread spread-2">
+    <div class="col full" style="border-right:none">
+      <div class="col-label">5 Respondents · Score 1–5</div>
+      <table class="data-tbl">
+        <thead>
+          <tr>
+            <th>Respondent</th>
+            <th>Age</th>
+            <th>Response</th>
+            <th>Awareness /5</th>
+            <th>Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Priya S.</td><td>24</td>
+            <td>"Never thought about it"</td>
+            <td>1</td>
+            <td><span class="pill pill-rust">Unaware</span></td>
+          </tr>
+          <tr>
+            <td>Rohan M.</td><td>21</td>
+            <td>"Maybe? I play music near mine"</td>
+            <td>2</td>
+            <td><span class="pill pill-grey">Vague</span></td>
+          </tr>
+          <tr>
+            <td>Mr. Sharma</td><td>52</td>
+            <td>"I thought it was air pollution"</td>
+            <td>1</td>
+            <td><span class="pill pill-rust">Unaware</span></td>
+          </tr>
+          <tr>
+            <td>Anika T.</td><td>19</td>
+            <td>"Yes, phytoacoustics is real"</td>
+            <td>5</td>
+            <td><span class="pill pill-sage">Informed</span></td>
+          </tr>
+          <tr>
+            <td>Meera K.</td><td>28</td>
+            <td>"I saw the IKEA experiment"</td>
+            <td>3</td>
+            <td><span class="pill pill-grey">Partial</span></td>
+          </tr>
+          <tr>
+            <td colspan="3"><strong>Average</strong></td>
+            <td><strong>2.4 / 5</strong></td>
+            <td><span class="pill pill-ink">Design Opportunity</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Phase 3 Params -->
+  <div class="chapter">
+    <div class="chapter-num">05</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Phase 3 — Observational Parameters</span>
+      <span class="chapter-title">What We Measured & Why</span>
+    </div>
+  </div>
+
+  <div class="param-grid">
+    <div class="param-cell">
+      <div class="param-icon">🔊</div>
+      <div class="param-name">Ambient Sound Level</div>
+      <div class="param-detail">dB · NIOSH SLM app · Core independent variable. Measured at both locations twice daily — morning + evening.</div>
+    </div>
+    <div class="param-cell">
+      <div class="param-icon">🌿</div>
+      <div class="param-name">Leaf Droop / Health</div>
+      <div class="param-detail">Ordinal 0–3 · Visual observation · 0 = healthy turgid leaves, 3 = severe droop + yellowing. Most visible stress marker.</div>
+    </div>
+    <div class="param-cell">
+      <div class="param-icon">😌</div>
+      <div class="param-name">Personal Mood / Focus</div>
+      <div class="param-detail">Scale 1–5 · Self-log · One number, end of day. Tests the parallel human–plant wellbeing hypothesis in the same environment.</div>
+    </div>
+    <div class="param-cell">
+      <div class="param-icon">☀️</div>
+      <div class="param-name">Light Level (approx.)</div>
+      <div class="param-detail">Lux estimate · Lux meter phone app · Controls for sunlight as a confounding variable between balcony and indoor plants.</div>
+    </div>
+  </div>
+
+  <!-- Data log -->
+  <div class="chapter">
+    <div class="chapter-num">06</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Phase 3 — Primary Data</span>
+      <span class="chapter-title">7-Day Observation Log · Apr 14–20</span>
+    </div>
+  </div>
+
+  <div class="spread spread-2" style="display:block">
+    <div class="col full">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);margin-bottom:16px">
+        <div style="background:var(--sage-pale);padding:10px 16px;font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-dark)">Plant A — Balcony · Urban Noise</div>
+        <div style="background:var(--paper-warm);padding:10px 16px;font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--rust)">Plant B — Indoor · Quieter Domestic</div>
+      </div>
+      <div class="obs-wrap">
+        <table class="obs-tbl">
+          <thead>
+            <tr>
+              <th class="meta">Date</th>
+              <th class="meta">Day</th>
+              <th class="a">A Droop (0–3)</th>
+              <th class="a">A dB avg</th>
+              <th class="a">A Lux</th>
+              <th class="b">B Droop (0–3)</th>
+              <th class="b">B dB avg</th>
+              <th class="b">B Lux</th>
+              <th class="meta">Mood /5</th>
+              <th class="meta">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Apr 14</td><td>1</td><td>1</td><td>80 dB</td><td>~3,200 lux</td><td>0</td><td>48 dB</td><td>~180 lux</td><td>3</td><td>Baseline set</td></tr>
+            <tr><td>Apr 15</td><td>2</td><td>1</td><td>82 dB</td><td>~3,000 lux</td><td>0</td><td>46 dB</td><td>~170 lux</td><td>3</td><td>—</td></tr>
+            <tr><td>Apr 16</td><td>3</td><td>2</td><td>85 dB</td><td>~3,500 lux</td><td>0</td><td>50 dB</td><td>~200 lux</td><td>4</td><td>A: first droop increase</td></tr>
+            <tr><td>Apr 17</td><td>4</td><td>2</td><td>83 dB</td><td>~2,800 lux</td><td>0</td><td>47 dB</td><td>~160 lux</td><td>4</td><td>—</td></tr>
+            <tr><td>Apr 18</td><td>5</td><td>2</td><td>84 dB</td><td>~3,100 lux</td><td>1</td><td>52 dB</td><td>~190 lux</td><td>3</td><td>B: first minor droop</td></tr>
+            <tr><td>Apr 19</td><td>6</td><td>3</td><td>86 dB</td><td>~3,400 lux</td><td>1</td><td>49 dB</td><td>~175 lux</td><td>2</td><td>A: severe droop + yellowing</td></tr>
+            <tr><td>Apr 20</td><td>7</td><td>3</td><td>87 dB</td><td>~3,600 lux</td><td>0</td><td>44 dB</td><td>~165 lux</td><td>4</td><td>B recovered (quieter Sunday)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:10px;font-family:'Courier Prime',monospace;font-size:9px;color:rgba(17,16,16,0.3);letter-spacing:1px">* Higher droop = worse health. Plant A = outdoor/balcony. Plant B = indoor/domestic. Droop scale: 0 = turgid, 3 = severe stress.</div>
+    </div>
+  </div>
+
+  <!-- Data-to-Visual Mapping -->
+  <div class="chapter">
+    <div class="chapter-num">07</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Phase 3 — Design Thinking</span>
+      <span class="chapter-title">Data-to-Visual Mapping Table</span>
+    </div>
+  </div>
+
+  <div class="col full" style="border-right:none;border-bottom:1px solid var(--rule)">
+    <table class="map-tbl">
+      <thead>
+        <tr>
+          <th>Data Variable</th>
+          <th>Data Type</th>
+          <th>Visual Encoding</th>
+          <th>Principle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Leaf Droop Score (0–3)</td>
+          <td>Ordinal</td>
+          <td>Colour gradient: green → amber → red across table rows</td>
+          <td>Pre-attentive processing — colour hue registers before conscious attention</td>
+        </tr>
+        <tr>
+          <td>Ambient dB Level</td>
+          <td>Quantitative</td>
+          <td>Line chart with area fill — Y axis, X = days</td>
+          <td>Cleveland & McGill: position on common scale = most accurate quantitative comparison</td>
+        </tr>
+        <tr>
+          <td>Light Level (lux)</td>
+          <td>Quantitative</td>
+          <td>Secondary Y-axis as dotted line overlay on dB chart</td>
+          <td>Tufte data-ink ratio — overlay preserves space, shows relationship without extra panel</td>
+        </tr>
+        <tr>
+          <td>Personal Mood (1–5)</td>
+          <td>Ordinal</td>
+          <td>Small glyphs below timeline — circle fill level 1–5</td>
+          <td>Gestalt proximity — mood sits at the day it occurred; fills intuitively convey scale</td>
+        </tr>
+        <tr>
+          <td>Plant identity (A vs B)</td>
+          <td>Categorical</td>
+          <td>Consistent colour coding: sage = indoor B, rust = outdoor A</td>
+          <td>Pre-attentive: colour hue distinguishes categories instantly across all panels</td>
+        </tr>
+        <tr>
+          <td>Day / Date</td>
+          <td>Temporal</td>
+          <td>X-axis (left → right), labelled with date</td>
+          <td>Convention: time flows left to right — zero cognitive load</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Visual Experiments -->
+  <div class="chapter">
+    <div class="chapter-num">08</div>
+    <div class="chapter-title-wrap">
+      <span class="chapter-tag">Phase 3 — Experiments</span>
+      <span class="chapter-title">Three Visual Experiments</span>
+    </div>
+  </div>
+
+  <div class="exp-band">
+    <div class="exp-col">
+      <div class="exp-n">01</div>
+      <div class="exp-type">Analog · Hand-Drawn</div>
+      <div class="exp-title">Daily Plant Portrait</div>
+      <div class="exp-body">
+        Side-by-side pencil portraits of Plant A and Plant B drawn each morning across the 7 days. Leaves rendered turgid or drooping based on actual observed score. A small human silhouette alongside with a mood indicator. Pencil and markers, A4, across a spread.
+      </div>
+      <div class="exp-visual">DAY 1     DAY 4     DAY 7
+ ↑ turgid  ↑ turgid  ↑ turgid  ← B (indoor)
+ ↑ turgid  ↘ droop   ↓ droop   ← A (balcony)
+ 😐 mood 3  😊 mood 4  😐 mood 4</div>
+    </div>
+    <div class="exp-col warm">
+      <div class="exp-n">02</div>
+      <div class="exp-type">Digital · Tool-Based</div>
+      <div class="exp-title">Dual-Axis Chart</div>
+      <div class="exp-body">
+        Dual-axis line chart in Google Sheets. Sound level (dB) and leaf droop score for both plants plotted over 7 days. Personal mood score overlaid as a third line. Coloured background bands for weekday vs weekend. Export as PNG.
+      </div>
+      <div class="exp-visual">dB  ┤        ___________
+    │   ____/
+    │__/                  ← A droop
+────────────────── days
+    │
+    │  ─────────────────  ← B droop
+    │
+mood ····•·····•·····•</div>
+    </div>
+    <div class="exp-col">
+      <div class="exp-n">03</div>
+      <div class="exp-type">Wild Card · Figma Poster</div>
+      <div class="exp-title">Frequency Portrait</div>
+      <div class="exp-body">
+        A Figma poster visualising the frequency "personality" of three sound environments: Delhi street noise, natural birdsong, and silence. Reference spectrum screenshots from a free online analyser. Visual chaos of urban noise contrasted against structured, harmonic patterns of nature sound — arguing the point without a single number.
+      </div>
+      <div class="exp-visual">DELHI STREET    ≋≋≋≋≋≋≋≋≋≋≋≋  chaos
+BIRDSONG        ♪ · ♪ · · ♪ ·   rhythm
+SILENCE         ·  ·  ·  ·  ·   space</div>
+    </div>
+  </div>
+
+  <!-- Waveform visual -->
+  <div class="col full" style="border-right:none;padding:36px 44px 28px;border-bottom:1px solid var(--rule)">
+    <div class="col-label">Experiment 3 — Waveform Preview</div>
+    <canvas id="waveCanvas" height="72"></canvas>
+    <div style="display:grid;grid-template-columns:1fr 1fr;margin-top:10px">
+      <div style="font-family:'Courier Prime',monospace;font-size:9px;color:var(--sage-dark);letter-spacing:1px">Plant B — Indoor (lo-fi domestic) · smooth, structured</div>
+      <div style="font-family:'Courier Prime',monospace;font-size:9px;color:var(--rust);letter-spacing:1px;text-align:right">Plant A — Balcony (urban noise) · erratic, compressed</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="site-footer">
+    <div>
+      <div class="footer-section-label">Sonic Growth</div>
+      <div class="footer-body">A Human–Nature Connection project. DTU B.Des HCI, 2025–26. Investigating the invisible acoustic–biological relationship between urban sound and plant vitality.</div>
+    </div>
+    <div>
+      <div class="footer-section-label">Phase 3 Deliverables</div>
+      <div class="footer-body">Observational parameters · Data collection report · Data-to-visual mapping table · Three visual experiments · Interactive dashboard prototype</div>
+    </div>
+    <div>
+      <div class="footer-section-label">Next</div>
+      <div class="footer-body">Phase 4: Figma hi-fi dashboard. Usability test with 5 plant owners. Phase 5: Swap sound environments — does the trend invert?</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ DASHBOARD ═══════════════ -->
+<div id="page-dashboard" class="page">
+  <div class="dash-wrap">
+
+    <div class="dash-sidebar">
+      <div>
+        <div class="dash-sidebar-head">Sonic <span>Growth</span></div>
+        <div class="dash-sidebar-sub">Plant Sound Tracker</div>
+      </div>
+
+      <div class="day-box">
+        <div class="day-box-n" id="dayCount">0</div>
+        <div class="day-box-label">Days Logged</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="form-section">Entry Form</div>
+
+        <div class="form-row">
+          <label class="form-lbl">Day Number</label>
+          <input class="form-ctrl" type="number" id="dayNum" min="1" placeholder="e.g. 1">
+        </div>
+
+        <div class="form-section" style="margin-top:4px">Plant A — Balcony</div>
+
+        <div class="form-row">
+          <label class="form-lbl">Droop Score (0–3)</label>
+          <input class="form-ctrl" type="number" id="aDroop" min="0" max="3" placeholder="0=healthy 3=stressed">
+        </div>
+        <div class="form-row">
+          <label class="form-lbl">Avg dB</label>
+          <input class="form-ctrl" type="number" id="aDb" placeholder="e.g. 82">
+        </div>
+        <div class="form-row">
+          <label class="form-lbl">Lux (approx.)</label>
+          <input class="form-ctrl" type="number" id="aLux" placeholder="e.g. 3200">
+        </div>
+
+        <div class="form-section" style="margin-top:4px">Plant B — Indoor</div>
+
+        <div class="form-row">
+          <label class="form-lbl">Droop Score (0–3)</label>
+          <input class="form-ctrl" type="number" id="bDroop" min="0" max="3" placeholder="0=healthy 3=stressed">
+        </div>
+        <div class="form-row">
+          <label class="form-lbl">Avg dB</label>
+          <input class="form-ctrl" type="number" id="bDb" placeholder="e.g. 48">
+        </div>
+        <div class="form-row">
+          <label class="form-lbl">Lux (approx.)</label>
+          <input class="form-ctrl" type="number" id="bLux" placeholder="e.g. 180">
+        </div>
+
+        <div class="form-row">
+          <label class="form-lbl">Your Mood (1–5)</label>
+          <input class="form-ctrl" type="number" id="mood" min="1" max="5" placeholder="1=low 5=great">
+        </div>
+
+        <button class="action-btn action-btn-primary" onclick="logEntry()">Log Entry</button>
+        <button class="action-btn action-btn-ghost" onclick="loadSample()">Load Sample Data</button>
       </div>
     </div>
 
-    <!-- AI Insights Sidebar -->
-    <div class="ai-insights">
-      <div class="ai-insights-header">
-        <div class="ai-icon">⚡</div>
-        <div class="ai-insights-title">AI Insights</div>
-      </div>
-      <div class="ai-content" id="aiContent">
-        <div style="color: var(--rule); font-style: italic; font-size: 12px;">
-          Log 3+ entries to generate AI-driven correlation analysis and patterns.
+    <div class="dash-main">
+
+      <div class="dash-header">
+        <div>
+          <div class="dash-h">Plant <span>Tracker</span></div>
+          <div class="dash-meta" style="margin-top:4px">Sonic Growth · Sound × Health · Apr 2025</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="display:flex;align-items:center;gap:6px;font-family:'Courier Prime',monospace;font-size:9px;color:rgba(17,16,16,0.3);letter-spacing:1.5px;text-transform:uppercase">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--rust);display:inline-block"></span>
+            Plant A · Balcony
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-family:'Courier Prime',monospace;font-size:9px;color:rgba(17,16,16,0.3);letter-spacing:1.5px;text-transform:uppercase">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--sage-dark);display:inline-block"></span>
+            Plant B · Indoor
+          </div>
         </div>
       </div>
-      <button class="ai-refresh-btn" id="aiRefreshBtn" onclick="generateAIInsights()" disabled>
-        Generate Insights
-      </button>
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi red">
+          <div class="kpi-lbl">Plant A · Avg Droop</div>
+          <div class="kpi-val" id="aAvgDroop">—</div>
+          <div class="kpi-unit">/ 3 (0=healthy)</div>
+          <div class="kpi-delta dn" id="aDroopDelta"></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Plant B · Avg Droop</div>
+          <div class="kpi-val" id="bAvgDroop">—</div>
+          <div class="kpi-unit">/ 3 (0=healthy)</div>
+          <div class="kpi-delta up" id="bDroopDelta"></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Sonic Score · Plant A</div>
+          <div class="kpi-val" id="aScore">—</div>
+          <div class="score-bar-wrap">
+            <div class="score-bar"><div class="score-bar-fill low" id="aScoreBar" style="width:0%"></div></div>
+          </div>
+          <div class="kpi-unit">/100</div>
+        </div>
+        <div class="kpi grey">
+          <div class="kpi-lbl">Sonic Score · Plant B</div>
+          <div class="kpi-val" id="bScore">—</div>
+          <div class="score-bar-wrap">
+            <div class="score-bar"><div class="score-bar-fill" id="bScoreBar" style="width:0%"></div></div>
+          </div>
+          <div class="kpi-unit">/100</div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="chart-row">
+        <div class="chart-block full">
+          <div class="chart-lbl">
+            Leaf Droop Score Over Time (0=healthy, 3=stressed)
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--rust)"></div>Plant A (balcony)</div>
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--sage-dark)"></div>Plant B (indoor)</div>
+            </div>
+          </div>
+          <canvas id="droopChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-block">
+          <div class="chart-lbl">
+            Ambient dB Levels
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--rust)"></div>A</div>
+              <div class="legend-item"><div class="legend-swatch" style="background:var(--sage-dark)"></div>B</div>
+            </div>
+          </div>
+          <canvas id="dbChart"></canvas>
+        </div>
+        <div class="chart-block">
+          <div class="chart-lbl">Mood Score (1–5)</div>
+          <canvas id="moodChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Corr band -->
+      <div class="corr-band">
+        <div class="corr-cell">
+          <div class="corr-val highlight" id="corrVal">—</div>
+          <div class="corr-lbl">Correlation: A dB × A Droop</div>
+        </div>
+        <div class="corr-cell">
+          <div class="corr-val" id="dbDiffVal">—</div>
+          <div class="corr-lbl">Avg dB difference (A − B)</div>
+        </div>
+        <div class="corr-cell">
+          <div class="corr-val" id="moodAvgVal">—</div>
+          <div class="corr-lbl">Avg mood score</div>
+        </div>
+      </div>
+
+      <!-- Log -->
+      <div class="log-panel">
+        <div class="chart-lbl" style="margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--rule)">Full Data Log</div>
+        <div id="logArea"><div class="empty">No entries yet — log your first entry or load sample data</div></div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<!-- SETTINGS PAGE -->
-<div id="page-settings" class="page">
-  <div class="settings-section">
-    <div class="settings-title">Settings</div>
-    
-    <div class="settings-group">
-      <label class="settings-label">Data Management</label>
-      <button class="btn-secondary" onclick="exportData()">Export Data (JSON)</button>
-      <button class="btn-secondary" onclick="clearData()" style="margin-top: 8px;">Clear All Data</button>
-    </div>
+<!-- ═══════════════ PRESENTATION ═══════════════ -->
+<div id="page-presentation" class="page">
 
-    <div class="settings-note">
-      <strong>About AI Analysis:</strong> All pattern detection happens locally in your browser using mathematics (Pearson correlation, linear regression, forecasting). No data is sent anywhere. No API keys, no external services—your data stays on your device.
+  <!-- Slide 1 — Cover -->
+  <div class="pres-cover">
+    <div class="pres-cover-left">
+      <div class="pres-cover-left-img" aria-hidden="true"></div>
+      <div class="pres-slide-eyebrow">Human–Nature Connection · DTU HCI · Phase 3</div>
+      <div class="pres-slide-title">
+        Sonic<br>
+        <span class="outline">Growth</span><br>
+        <span class="sage" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:0.6em;letter-spacing:-1px">The city doesn't sing back.</span>
+      </div>
+      <div class="pres-cover-meta">
+        <div class="pres-meta-item">
+          <div class="pres-meta-lbl">Type</div>
+          <div class="pres-meta-val">Data Viz + Product Concept</div>
+        </div>
+        <div class="pres-meta-item">
+          <div class="pres-meta-lbl">Phase</div>
+          <div class="pres-meta-val">3 — Collection, Mapping, Experiments</div>
+        </div>
+        <div class="pres-meta-item">
+          <div class="pres-meta-lbl">Dates</div>
+          <div class="pres-meta-val">Apr 14–20, 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="pres-cover-right">
+      <div class="pres-cover-right-label">Research Question</div>
+      <div class="pres-cover-statement">
+        "Do urban sound environments affect plant health and human mood in the same direction — and can a 7-day parallel observation show it?"
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:52px;color:var(--sage-dark);line-height:1">7</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;font-weight:700">Days observed</div>
+        </div>
+        <div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:52px;color:var(--sage-dark);line-height:1">4</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;font-weight:700">Variables</div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Slide 2 — The Hook -->
+  <div class="pres-slide" style="background:var(--paper)">
+    <div class="slide-bg-num">02</div>
+    <div class="pres-slide-inner">
+      <div class="slide-tag">The Hook</div>
+      <div class="slide-h">Your plant is listening.</div>
+      <div class="slide-body">
+        Urban residents invest in indoor plants for wellness, calm, air quality. They water on schedule, give them sunlight, repot when needed. But nobody asks: <em>what is the plant hearing?</em><br><br>
+        In a country where 74% of cities exceed WHO noise limits, and indoor plant ownership has surged post-2020, the acoustic environment is shaping plant health daily — invisibly. This project makes that visible.
+      </div>
+      <div class="slide-callout">
+        <div class="slide-callout-text">The same sonic environment stressing your plant is stressing <em>you</em>. Biology is not separate from the built environment.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 — The Problem -->
+  <div class="pres-slide" style="background:var(--ink)">
+    <div class="pres-slide-inner">
+      <div class="slide-tag" style="color:var(--sage)">Problem Statement</div>
+      <div class="slide-h" style="color:#fff">The gap no one<br>is designing for.</div>
+      <div class="slide-2col" style="margin-top:0">
+        <div>
+          <div class="slide-stat-big">74%</div>
+          <div class="slide-stat-lbl" style="color:rgba(255,255,255,0.75)">Indian cities exceed WHO 55 dB limit</div>
+          <div class="slide-stat-body" style="color:rgba(255,255,255,0.8)">Urban noise is a public health crisis. Its biological impact on indoor plant life — and on the humans who care for those plants — has never been made visible to the public.</div>
+        </div>
+        <div>
+          <div class="slide-stat-big">2.4</div>
+          <div class="slide-stat-lbl" style="color:rgba(255,255,255,0.75)">Average awareness score / 5 (our survey)</div>
+          <div class="slide-stat-body" style="color:rgba(255,255,255,0.8)">5 people interviewed. Only 1 — a biology student — was fully aware of phytoacoustics. The other 4 had never considered that sound affects their plants. This is a design opportunity.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4 — Experiment Setup -->
+  <div class="pres-slide" style="background:var(--paper-warm)">
+    <div class="slide-bg-num">04</div>
+    <div class="pres-slide-inner">
+      <div class="slide-tag">The Experiment</div>
+      <div class="slide-h">Two plants.<br>One question.</div>
+      <div class="slide-body">Same species — <em>Epipremnum aureum</em>. Same soil, same watering. No artificial sound. The natural acoustic difference between a Delhi balcony and a quiet room is the experiment.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:32px;background:var(--rule);border:1px solid var(--rule)">
+        <div style="background:var(--sage-pale);padding:28px 28px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--sage-dark);margin-bottom:12px">Plant B — The Thriving One</div>
+          <div style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:400;color:var(--ink-soft);line-height:1.7">Indoor · domestic quiet<br>~44–52 dB · 160–200 lux<br>7 days · morning observation</div>
+        </div>
+        <div style="background:var(--paper);padding:28px 28px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--rust);margin-bottom:12px">Plant A — The Struggling One</div>
+          <div style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:400;color:var(--ink-soft);line-height:1.7">Balcony · Delhi street noise<br>~80–87 dB · 2800–3600 lux<br>7 days · morning observation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5 — The Data -->
+  <div class="pres-slide">
+    <div class="slide-bg-num">05</div>
+    <div class="pres-slide-inner">
+      <div class="slide-tag">7-Day Data</div>
+      <div class="slide-h">One clear story.</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:28px">
+        <div style="background:var(--paper-warm);padding:16px 12px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:var(--sage-dark)">1</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--sage-dark);letter-spacing:1px">A: 1</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--rust);letter-spacing:1px">B: 0</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:4px">Apr 14</div>
+        </div>
+        <div style="background:var(--paper-warm);padding:16px 12px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:var(--sage-dark)">2</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--sage-dark);letter-spacing:1px">A: 1</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--rust);letter-spacing:1px">B: 0</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:4px">Apr 15</div>
+        </div>
+        <div style="background:var(--paper-warm);padding:16px 12px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:var(--sage-dark)">3</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--sage-dark);letter-spacing:1px">A: 2 ↑</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--rust);letter-spacing:1px">B: 0</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:4px">Apr 16</div>
+        </div>
+        <div style="background:var(--paper-warm);padding:16px 12px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:var(--sage-dark)">4</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--sage-dark);letter-spacing:1px">A: 2</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--rust);letter-spacing:1px">B: 0</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:4px">Apr 17</div>
+        </div>
+        <div style="background:var(--paper-warm);padding:16px 12px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:var(--sage-dark)">5</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--sage-dark);letter-spacing:1px">A: 2</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--rust);letter-spacing:1px">B: 1 ↑</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:4px">Apr 18</div>
+        </div>
+        <div style="background:var(--rust);padding:16px 12px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:#fff">6</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:rgba(255,255,255,0.95);letter-spacing:1px">A: 3 ↑</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:1px">B: 1</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);margin-top:4px">Apr 19</div>
+        </div>
+        <div style="background:var(--sage-pale);padding:16px 12px;text-align:center">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:var(--sage-dark)">7</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--sage-dark);letter-spacing:1px">A: 3</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:700;color:var(--rust);letter-spacing:1px">B: 0 ↓</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;font-weight:600;color:var(--ink-soft);margin-top:4px">Apr 20</div>
+        </div>
+      </div>
+      <div style="margin-top:8px;font-family:'Courier Prime',monospace;font-size:9px;color:rgba(17,16,16,0.3)">A = Plant A droop score · B = Plant B droop score · Scale: 0 = healthy, 3 = severe stress</div>
+    </div>
+  </div>
+
+  <!-- Slide 6 — Science -->
+  <div class="pres-slide" style="background:var(--paper-warm)">
+    <div class="slide-bg-num">06</div>
+    <div class="pres-slide-inner">
+      <div class="slide-tag">The Science</div>
+      <div class="slide-h">Phytoacoustics:<br>sound is biology.</div>
+      <div class="slide-body">
+        Plants are not passive. Sound waves create micro-vibrations in plant tissue that travel through cell walls. At 100–500 Hz, these vibrations accelerate cell division. Above 80 dB, stress responses activate — stomata close, CO₂ absorption drops, photosynthesis slows.
+      </div>
+      <div class="slide-3col">
+        <div class="slide-3cell">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:42px;color:var(--sage-dark);line-height:1">100–500</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;color:var(--ink-soft);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:6px">Hz that stimulates growth (RDA Korea 2007)</div>
+        </div>
+        <div class="slide-3cell">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:42px;color:var(--rust);line-height:1">&gt;80</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;color:var(--ink-soft);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:6px">dB triggers stomatal closure + stress response</div>
+        </div>
+        <div class="slide-3cell">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:42px;color:var(--ink);line-height:1">+15%</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:13px;color:var(--ink-soft);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:6px">Growth increase with sound stimulation (ISHS)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7 — Product -->
+  <div class="pres-slide" style="background:var(--ink)">
+    <div class="pres-slide-inner">
+      <div class="slide-tag" style="color:var(--sage)">The Product</div>
+      <div class="slide-h" style="color:#fff">Sonic Growth:<br>a public plant<br>tracker.</div>
+      <div class="slide-body" style="color:rgba(255,255,255,0.45);max-width:560px;margin-top:0">
+        A free web dashboard — this prototype — where anyone logs their plant's daily droop score and ambient sound level. Over 7 days, the correlation emerges. Over 30 days, it becomes an argument.
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-top:32px">
+        <div style="background:rgba(255,255,255,0.03);padding:24px 20px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:2px;color:var(--sage);text-transform:uppercase;margin-bottom:8px">Log</div>
+          <div style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:400;color:rgba(255,255,255,0.7);line-height:1.6">Daily droop + dB. 60 seconds.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:24px 20px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:2px;color:var(--sage);text-transform:uppercase;margin-bottom:8px">Track</div>
+          <div style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:400;color:rgba(255,255,255,0.7);line-height:1.6">Live charts show sound vs health correlation.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);padding:24px 20px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:2px;color:var(--sage);text-transform:uppercase;margin-bottom:8px">Discover</div>
+          <div style="font-family:'Barlow',sans-serif;font-size:16px;font-weight:400;color:rgba(255,255,255,0.7);line-height:1.6">Your Sonic Health Score reveals the acoustic cost.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8 — Visual Experiments -->
+  <div class="pres-slide">
+    <div class="slide-bg-num">08</div>
+    <div class="pres-slide-inner">
+      <div class="slide-tag">Visual Experiments</div>
+      <div class="slide-h">Three ways to<br>see the data.</div>
+      <div class="pres-exp-row">
+        <div class="pres-exp-cell">
+          <div class="pres-exp-n">01</div>
+          <div class="pres-exp-type">Analog</div>
+          <div class="pres-exp-title">Daily Portrait</div>
+          <div class="pres-exp-body">7-day hand-drawn plant portraits — leaves rendered turgid or drooping from actual scores. Pencil + markers on A4.</div>
+        </div>
+        <div class="pres-exp-cell warm" style="background:var(--paper-warm)">
+          <div class="pres-exp-n">02</div>
+          <div class="pres-exp-type">Digital</div>
+          <div class="pres-exp-title">Dual-Axis Chart</div>
+          <div class="pres-exp-body">Dual-axis line chart in Google Sheets: dB + droop + mood over 7 days. Weekday vs weekend bands.</div>
+        </div>
+        <div class="pres-exp-cell">
+          <div class="pres-exp-n">03</div>
+          <div class="pres-exp-type">Wild Card</div>
+          <div class="pres-exp-title">Frequency Portrait</div>
+          <div class="pres-exp-body">Figma poster — the visual "personality" of Delhi street noise vs birdsong vs silence. No numbers needed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9 — Next -->
+  <div class="pres-slide" style="background:var(--paper-warm)">
+    <div class="slide-bg-num">09</div>
+    <div class="pres-slide-inner">
+      <div class="slide-tag">Next Steps</div>
+      <div class="slide-h">What comes<br>after.</div>
+      <div class="slide-2col" style="margin-top:32px">
+        <div style="padding-top:24px;border-top:2px solid var(--sage-dark)">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Phase 4 — Prototype</div>
+          <div class="slide-stat-body">Figma hi-fi dashboard. Usability test — can 5 plant owners read the Sonic Health Score without explanation?</div>
+        </div>
+        <div style="padding-top:24px;border-top:2px solid var(--sage-dark)">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Phase 5 — Test</div>
+          <div class="slide-stat-body">Hypothesis reversal — swap environments in Week 2. If A improves and B deteriorates, that confirms causation, not correlation.</div>
+        </div>
+        <div style="padding-top:24px;border-top:1px solid var(--rule)">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Public Tool</div>
+          <div class="slide-stat-body">Open the dashboard to any plant owner. Aggregate city-wide sound × plant health data. Delhi noise map by neighbourhood.</div>
+        </div>
+        <div style="padding-top:24px;border-top:1px solid var(--rule)">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;color:var(--sage-dark)">The Bigger Argument</div>
+          <div class="slide-stat-body">If plants in quiet neighbourhoods are healthier than plants near highways — that data becomes an urban policy argument.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10 — Closing -->
+  <div class="pres-closing">
+    <div class="pres-closing-img" aria-hidden="true"></div>
+    <div class="pres-closing-big">
+      The city<br>
+      doesn't<br>
+      <span class="outline">sing back.</span><br>
+      <span class="sage">But your plant<br>is telling you.</span>
+    </div>
+    <div class="pres-closing-sub">
+      Are you listening?<br><br>
+      — Sonic Growth · DTU HCI · 2025–26
+    </div>
+  </div>
+
 </div>
 
 <script>
-// ─── STATE & STORAGE ─── 
-let entries = [];
-let droopChart, dbChart, moodChart;
-const STORAGE_KEY = 'sonic_growth_entries';
-
-// Load from localStorage on startup
-function loadFromStorage() {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      entries = JSON.parse(stored);
-    } catch (e) {
-      console.error('Failed to load stored data:', e);
-    }
-  }
-}
-
-// Save to localStorage
-function saveToStorage() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-}
-
-// ─── TAB SWITCHING ─── 
+/* ─── Tab switching ─── */
 function switchTab(name, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -758,11 +2599,58 @@ function switchTab(name, el) {
   window.scrollTo(0, 0);
 }
 
-// ─── CHARTS INITIALIZATION ─── 
+/* ─── Waveform (Experiment 3 preview) ─── */
+function drawWave() {
+  const c = document.getElementById('waveCanvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  c.width = c.offsetWidth * window.devicePixelRatio;
+  c.height = 72 * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  const W = c.offsetWidth, H = 72;
+  ctx.clearRect(0, 0, W, H);
+
+  // Plant B — smooth indoor (sage)
+  ctx.beginPath();
+  ctx.strokeStyle = '#4A7050';
+  ctx.lineWidth = 1.5;
+  for (let x = 0; x < W / 2 - 20; x++) {
+    const t = x / (W / 2);
+    const y = H / 4 + Math.sin(x * 0.06) * (10 + t * 4) + Math.sin(x * 0.13) * 4;
+    x === 0 ? ctx.moveTo(x + 10, y) : ctx.lineTo(x + 10, y);
+  }
+  ctx.stroke();
+
+  // Plant A — noisy balcony (rust)
+  ctx.beginPath();
+  ctx.strokeStyle = '#B85C3C';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W / 2 - 20; x++) {
+    const noise = (Math.random() - 0.5) * 28;
+    const base = Math.sin(x * 0.09) * 8;
+    const y = H * 0.72 + base + noise;
+    x === 0 ? ctx.moveTo(x + W / 2 + 10, y) : ctx.lineTo(x + W / 2 + 10, y);
+  }
+  ctx.stroke();
+
+  // Divider
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(17,16,16,0.08)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.moveTo(W / 2, 4);
+  ctx.lineTo(W / 2, H - 4);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+/* ─── Dashboard ─── */
+let entries = [];
+let droopChart, dbChart, moodChart;
+
 function initCharts() {
   const base = {
     responsive: true,
-    maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
       x: { grid: { color: 'rgba(17,16,16,0.04)' }, ticks: { font: { family: 'Courier Prime', size: 9 }, color: 'rgba(17,16,16,0.3)' } },
@@ -804,7 +2692,6 @@ function initCharts() {
   });
 }
 
-// ─── DATA UPDATES ─── 
 function updateAll() {
   const s = [...entries].sort((a, b) => a.day - b.day);
   const labels = s.map(e => 'Day ' + e.day);
@@ -833,6 +2720,7 @@ function updateAll() {
   document.getElementById('aDroopDelta').textContent = 'trend day 1→' + s[n-1].day + ': ' + s[0].aDroop + '→' + s[n-1].aDroop;
   document.getElementById('bDroopDelta').textContent = 'trend day 1→' + s[n-1].day + ': ' + s[0].bDroop + '→' + s[n-1].bDroop;
 
+  // Sonic score: invert droop (0=best, 3=worst) and dB penalty
   const aDbAvg = s.reduce((t, e) => t + e.aDb, 0) / n;
   const bDbAvg = s.reduce((t, e) => t + e.bDb, 0) / n;
   const aScoreV = Math.round(((3 - +aAvg) / 3) * 60 + Math.max(0, (90 - aDbAvg) / 90) * 40);
@@ -840,16 +2728,33 @@ function updateAll() {
 
   document.getElementById('aScore').textContent = aScoreV;
   document.getElementById('bScore').textContent = bScoreV;
+
+  const aBar = document.getElementById('aScoreBar');
+  aBar.style.width = aScoreV + '%';
+  aBar.className = 'score-bar-fill' + (aScoreV > 60 ? '' : aScoreV > 35 ? ' mid' : ' low');
+
+  const bBar = document.getElementById('bScoreBar');
+  bBar.style.width = bScoreV + '%';
+  bBar.className = 'score-bar-fill' + (bScoreV > 60 ? '' : bScoreV > 35 ? ' mid' : ' low');
+
   document.getElementById('dayCount').textContent = n;
 
-  // Enable AI button if 3+ entries
-  document.getElementById('aiRefreshBtn').disabled = n < 3;
+  // Correlation
+  if (n >= 3) {
+    const xs = s.map(e => e.aDb), ys = s.map(e => e.aDroop);
+    const xm = xs.reduce((a,b)=>a+b,0)/n, ym = ys.reduce((a,b)=>a+b,0)/n;
+    const num = xs.reduce((t,x,i)=>t+(x-xm)*(ys[i]-ym),0);
+    const den = Math.sqrt(xs.reduce((t,x)=>t+(x-xm)**2,0)*ys.reduce((t,y)=>t+(y-ym)**2,0));
+    document.getElementById('corrVal').textContent = den ? (num/den).toFixed(2) : '—';
+  } else {
+    document.getElementById('corrVal').textContent = 'need 3+';
+  }
 
-  // Update log
+  const dbDiff = (s.reduce((t,e)=>t+(e.aDb-e.bDb),0)/n).toFixed(1);
+  document.getElementById('dbDiffVal').textContent = '+' + dbDiff;
+  document.getElementById('moodAvgVal').textContent = (s.reduce((t,e)=>t+e.mood,0)/n).toFixed(1);
+
   updateLog(s);
-  
-  // Save to storage
-  saveToStorage();
 }
 
 function updateLog(s) {
@@ -906,9 +2811,13 @@ function loadSample() {
   updateAll();
 }
 
-// ─── PATTERN DETECTION AI (LOCAL, NO API) ─── 
+window.addEventListener('load', () => {
+  initCharts();
+  drawWave();
+});
 
-// Pearson Correlation: Measures how much two variables move together
+window.addEventListener('resize', drawWave);
+// ─── LOCAL AI PATTERN DETECTION ───
 function pearsonCorr(x, y) {
   const n = x.length;
   const xm = x.reduce((a, b) => a + b, 0) / n;
@@ -918,217 +2827,63 @@ function pearsonCorr(x, y) {
   return den ? num / den : 0;
 }
 
-// Linear Regression: Detects trend (is plant improving or worsening?)
 function linearRegression(x, y) {
   const n = x.length;
   const sumX = x.reduce((a, b) => a + b, 0);
   const sumY = y.reduce((a, b) => a + b, 0);
   const sumXY = x.reduce((t, xi, i) => t + xi * y[i], 0);
   const sumX2 = x.reduce((t, xi) => t + xi * xi, 0);
-  
   const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
   const intercept = (sumY - slope * sumX) / n;
-  
   return { slope, intercept };
 }
 
-// Predictive Trend: Forecasts next 3 days
-function predictTrend(data) {
-  if (data.length < 3) return null;
-  
-  const x = Array.from({ length: data.length }, (_, i) => i);
-  const aDropps = data.map(e => e.aDroop);
-  const bDropps = data.map(e => e.bDroop);
-  
-  const aReg = linearRegression(x, aDropps);
-  const bReg = linearRegression(x, bDropps);
-  
-  const lastDay = data[data.length - 1].day;
-  const forecast = {
-    a: [],
-    b: [],
-    days: []
-  };
-  
-  for (let i = 1; i <= 3; i++) {
-    const dayIndex = data.length + i - 1;
-    forecast.a.push(Math.min(3, Math.max(0, aReg.slope * dayIndex + aReg.intercept)));
-    forecast.b.push(Math.min(3, Math.max(0, bReg.slope * dayIndex + bReg.intercept)));
-    forecast.days.push(lastDay + i);
-  }
-  
-  return {
-    forecast,
-    aSlope: aReg.slope,
-    bSlope: bReg.slope,
-    aDeteriorating: aReg.slope > 0.05,
-    bDeteriorating: bReg.slope > 0.05
-  };
-}
-
-// AI Pattern Detection: Analyzes data locally (NO external API, pure JavaScript)
-function generateAIInsights() {
-  const s = [...entries].sort((a, b) => a.day - b.day);
-  if (s.length < 3) {
-    alert('Need at least 3 entries for pattern analysis.');
+function analyzePatterns() {
+  const entries = JSON.parse(localStorage.getItem('sonic_entries') || '[]');
+  if (entries.length < 3) {
+    alert('Need 3+ entries for AI analysis');
     return;
   }
 
-  const aiContent = document.getElementById('aiContent');
-  aiContent.innerHTML = `
-    <div class="ai-loading">
-      <div class="ai-loading-dot"></div>
-      <div class="ai-loading-dot"></div>
-      <div class="ai-loading-dot"></div>
-      Analyzing patterns...
-    </div>
+  const sorted = [...entries].sort((a, b) => a.day - b.day);
+  const n = sorted.length;
+  
+  // Calculate correlations
+  const dbDroppCorr = pearsonCorr(sorted.map(e => e.db_a), sorted.map(e => e.droop_a)).toFixed(3);
+  const moodDroppCorr = pearsonCorr(sorted.map(e => e.mood), sorted.map(e => e.droop_a)).toFixed(3);
+  
+  // Calculate trends
+  const x = Array.from({length: n}, (_, i) => i);
+  const droopA = sorted.map(e => e.droop_a);
+  const reg = linearRegression(x, droopA);
+  
+  // Generate insights
+  let insights = `
+    <strong>📊 Correlation Analysis:</strong><br>
+    • dB ↔ Droop (Plant A): r = ${dbDroppCorr} ${Math.abs(dbDroppCorr) > 0.5 ? '(strong!)' : '(weak)'}<br>
+    • Mood ↔ Droop: r = ${moodDroppCorr}<br><br>
+    
+    <strong>📈 Trend:</strong><br>
+    • Plant A slope: ${reg.slope.toFixed(3)}/day ${reg.slope > 0.05 ? '(worsening ⚠️)' : '(stable ✓)'}<br>
+    • Average droop: ${(droopA.reduce((a,b)=>a+b)/n).toFixed(2)}/3<br><br>
+    
+    <strong>💡 Insight:</strong><br>
+    Sound exposure ${Math.abs(dbDroppCorr) > 0.5 ? 'significantly affects' : 'may affect'} plant health.
   `;
-  document.getElementById('aiRefreshBtn').disabled = true;
-
-  // Simulate brief processing time for UX
-  setTimeout(() => {
-    // Calculate all statistics
-    const n = s.length;
-    const aAvg = (s.reduce((t, e) => t + e.aDroop, 0) / n).toFixed(2);
-    const bAvg = (s.reduce((t, e) => t + e.bDroop, 0) / n).toFixed(2);
-    const aDbAvg = (s.reduce((t, e) => t + e.aDb, 0) / n).toFixed(1);
-    const bDbAvg = (s.reduce((t, e) => t + e.bDb, 0) / n).toFixed(1);
-    const moodAvg = (s.reduce((t, e) => t + e.mood, 0) / n).toFixed(1);
-    
-    // Correlation analysis
-    const corrADbDroop = pearsonCorr(s.map(e => e.aDb), s.map(e => e.aDroop)).toFixed(3);
-    const corrBDbDroop = pearsonCorr(s.map(e => e.bDb), s.map(e => e.bDroop)).toFixed(3);
-    const corrMoodADroop = pearsonCorr(s.map(e => e.mood), s.map(e => e.aDroop)).toFixed(3);
-    
-    // Trend analysis
-    const trend = predictTrend(s);
-    const forecastA = trend.forecast.a.map(v => v.toFixed(1)).join(', ');
-    const forecastB = trend.forecast.b.map(v => v.toFixed(1)).join(', ');
-    
-    // Interpret correlation strength
-    const interpretCorr = (r) => {
-      const absR = Math.abs(r);
-      if (absR > 0.8) return 'very strong';
-      if (absR > 0.6) return 'strong';
-      if (absR > 0.4) return 'moderate';
-      if (absR > 0.2) return 'weak';
-      return 'negligible';
-    };
-    
-    // Generate insights
-    let insights = [];
-    
-    // Insight 1: Correlation pattern
-    if (Math.abs(corrADbDroop) > 0.5) {
-      insights.push(`📊 <strong>Sound-Droop Correlation:</strong> Plant A shows ${interpretCorr(corrADbDroop)} correlation (r=${corrADbDroop}) between dB levels and leaf droop. Higher noise = more wilting.`);
-    } else {
-      insights.push(`📊 <strong>Sound-Droop Correlation:</strong> Plant A shows ${interpretCorr(corrADbDroop)} correlation (r=${corrADbDroop}) between noise and droop. Weak relationship detected.`);
-    }
-    
-    // Insight 2: Plant comparison
-    if (aAvg > bAvg) {
-      const diff = (aAvg - bAvg).toFixed(2);
-      insights.push(`🌱 <strong>Plant Comparison:</strong> Plant A (noisy) droops more (${aAvg}/3) than Plant B (quiet, ${bAvg}/3). Difference: +${diff} droop. Sound exposure effect confirmed.`);
-    } else {
-      insights.push(`🌱 <strong>Plant Comparison:</strong> Plant B (quiet) actually droops more (${bAvg}/3) vs Plant A (${aAvg}/3). Noise may not be the main factor.`);
-    }
-    
-    // Insight 3: Trajectory
-    if (trend.aDeteriorating) {
-      insights.push(`📉 <strong>Plant A Trajectory:</strong> WORSENING. Droop increases ~${Math.abs(trend.aSlope).toFixed(3)} per day. Forecast: ${forecastA}/3. Consider reducing dB exposure immediately.`);
-    } else if (trend.aSlope < -0.05) {
-      insights.push(`📈 <strong>Plant A Trajectory:</strong> IMPROVING. Droop decreases ~${Math.abs(trend.aSlope).toFixed(3)} per day. Forecast: ${forecastA}/3. Keep current conditions.`);
-    } else {
-      insights.push(`➡️ <strong>Plant A Trajectory:</strong> STABLE. Minimal change over time. Forecast: ${forecastA}/3. Plant is adapting to environment.`);
-    }
-    
-    // Insight 4: Optimal dB range
-    const highDbDays = s.filter(e => e.aDb > 80).length;
-    const lowDbDays = s.filter(e => e.aDb < 60).length;
-    if (highDbDays > 0 && lowDbDays > 0) {
-      const highDbDroop = s.filter(e => e.aDb > 80).map(e => e.aDroop).reduce((a, b) => a + b, 0) / highDbDays;
-      const lowDbDroop = s.filter(e => e.aDb < 60).map(e => e.aDroop).reduce((a, b) => a + b, 0) / lowDbDays;
-      insights.push(`🎯 <strong>Optimal Range:</strong> Plant A at dB>80 droops more (avg ${highDbDroop.toFixed(1)}) than at dB<60 (avg ${lowDbDroop.toFixed(1)}). Recommendation: Keep noise <60 dB.`);
-    }
-    
-    // Insight 5: Observer mood correlation
-    if (Math.abs(corrMoodADroop) > 0.5) {
-      insights.push(`😊 <strong>Mood-Droop Correlation:</strong> Your mood (avg ${moodAvg}/5) shows ${interpretCorr(corrMoodADroop)} correlation (r=${corrMoodADroop}) with plant droop. Observer wellbeing may reflect plant stress.`);
-    }
-    
-    // Build HTML output
-    let html = `<div class="ai-insight-item">
-      <div class="ai-insight-label">🤖 Pattern Analysis</div>`;
-    
-    insights.forEach(insight => {
-      html += `<p>${insight}</p>`;
-    });
-    
-    html += `</div>`;
-    
-    // Add alerts
-    if (Math.abs(corrADbDroop) > 0.7) {
-      html += `
-      <div class="ai-insight-item ai-alert">
-        <div class="ai-insight-label">⚠️ Very Strong Sound-Droop Link</div>
-        <p>r = ${corrADbDroop} — Sound exposure is heavily affecting plant health. This is your dominant pattern.</p>
-      </div>`;
-    }
-    
-    if (trend.aDeteriorating) {
-      html += `
-      <div class="ai-insight-item ai-alert">
-        <div class="ai-insight-label">📉 Plant A Declining Fast</div>
-        <p>Slope: ${trend.aSlope.toFixed(3)}/day. At this rate, plant reaches critical droop within ${Math.ceil(3 / trend.aSlope)} days.</p>
-      </div>`;
-    }
-    
-    // Forecast card
-    html += `
-      <div class="ai-insight-item">
-        <div class="ai-insight-label">🔮 3-Day Forecast</div>
-        <p><strong>Plant A:</strong> ${forecastA}/3</p>
-        <p><strong>Plant B:</strong> ${forecastB}/3</p>
-      </div>`;
-    
-    aiContent.innerHTML = html;
-    document.getElementById('aiRefreshBtn').disabled = false;
-  }, 500);
+  
+  alert(insights);
 }
 
-// ─── DATA MANAGEMENT ─── 
-function exportData() {
-  const json = JSON.stringify(entries, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `sonic-growth-${new Date().toISOString().split('T')[0]}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
-function clearData() {
-  if (confirm('Clear all entries? This cannot be undone.')) {
-    entries = [];
-    localStorage.removeItem(STORAGE_KEY);
-    updateAll();
-  }
-}
-
-// ─── INITIALIZATION ─── 
-window.addEventListener('load', () => {
-  loadFromStorage();
-  initCharts();
-  updateAll();
-});
-</script>
 <footer style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink); color: rgba(255,255,255,0.6); padding: 10px 24px; font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 1px; border-top: 1px solid var(--sage-dark); z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
   <div>
-    <strong style="color: var(--sage);">Sonic Growth v4</strong> | AI Pattern Detection | Amity University Mohali
+    <strong style="color: var(--sage);">Sonic Growth v2</strong> | Human-Nature Connection | Amity University Mohali
   </div>
   <div style="text-align: right;">
     <strong style="color: var(--sage);">Lavanya Sharda</strong> | Roll: A25305223171 | B.Tech 3rd Year | 
     <a href="https://github.com/lavan-NYA" style="color: var(--sage); text-decoration: none;">GitHub</a>
   </div>
 </footer>
+
+</body>
+</html>
