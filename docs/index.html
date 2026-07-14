@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sonic Growth v2 | Lavanya Sharda (A25305223171) | Amity University Mohali</title>
+<title>Sonic Growth | Lavanya Sharda (A25305223171) | Amity University Mohali | AI Pattern Detection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -2817,9 +2817,18 @@ window.addEventListener('load', () => {
 });
 
 window.addEventListener('resize', drawWave);
-// ─── LOCAL AI PATTERN DETECTION ───
+</script>
+</body>
+<footer style="position: fixed; bottom: 0; left: 0; right: 0; background: #111010; color: rgba(255,255,255,0.6); padding: 10px 24px; font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 1px; border-top: 2px solid #7A9E7E; z-index: 50; display: flex; justify-content: space-between;">
+  <div><strong style="color: #7A9E7E;">Sonic Growth v2</strong> | AI Pattern Detection | Amity University Mohali</div>
+  <div><strong style="color: #7A9E7E;">Lavanya Sharda</strong> | Roll: A25305223171 | B.Tech 3rd Year | <a href="https://github.com/lavan-NYA" style="color: #7A9E7E; text-decoration: none;">GitHub</a></div>
+</footer>
+
+<script>
+// LOCAL AI PATTERN DETECTION
 function pearsonCorr(x, y) {
   const n = x.length;
+  if (n < 2) return 0;
   const xm = x.reduce((a, b) => a + b, 0) / n;
   const ym = y.reduce((a, b) => a + b, 0) / n;
   const num = x.reduce((t, xi, i) => t + (xi - xm) * (y[i] - ym), 0);
@@ -2838,52 +2847,55 @@ function linearRegression(x, y) {
   return { slope, intercept };
 }
 
-function analyzePatterns() {
+window.analyzePatterns = function() {
   const entries = JSON.parse(localStorage.getItem('sonic_entries') || '[]');
   if (entries.length < 3) {
-    alert('Need 3+ entries for AI analysis');
+    alert('Need 3+ entries. Click Load Sample first!');
     return;
   }
-
+  
   const sorted = [...entries].sort((a, b) => a.day - b.day);
   const n = sorted.length;
   
-  // Calculate correlations
-  const dbDroppCorr = pearsonCorr(sorted.map(e => e.db_a), sorted.map(e => e.droop_a)).toFixed(3);
-  const moodDroppCorr = pearsonCorr(sorted.map(e => e.mood), sorted.map(e => e.droop_a)).toFixed(3);
+  const aAvg = (sorted.reduce((t, e) => t + e.droop_a, 0) / n).toFixed(2);
+  const bAvg = (sorted.reduce((t, e) => t + e.droop_b, 0) / n).toFixed(2);
+  const aDb = (sorted.reduce((t, e) => t + e.db_a, 0) / n).toFixed(1);
+  const bDb = (sorted.reduce((t, e) => t + e.db_b, 0) / n).toFixed(1);
   
-  // Calculate trends
+  const corrDbDropp = pearsonCorr(sorted.map(e => e.db_a), sorted.map(e => e.droop_a)).toFixed(3);
+  const corrMood = pearsonCorr(sorted.map(e => e.mood), sorted.map(e => e.droop_a)).toFixed(3);
+  
   const x = Array.from({length: n}, (_, i) => i);
-  const droopA = sorted.map(e => e.droop_a);
-  const reg = linearRegression(x, droopA);
+  const reg = linearRegression(x, sorted.map(e => e.droop_a));
   
-  // Generate insights
-  let insights = `
-    <strong>📊 Correlation Analysis:</strong><br>
-    • dB ↔ Droop (Plant A): r = ${dbDroppCorr} ${Math.abs(dbDroppCorr) > 0.5 ? '(strong!)' : '(weak)'}<br>
-    • Mood ↔ Droop: r = ${moodDroppCorr}<br><br>
-    
-    <strong>📈 Trend:</strong><br>
-    • Plant A slope: ${reg.slope.toFixed(3)}/day ${reg.slope > 0.05 ? '(worsening ⚠️)' : '(stable ✓)'}<br>
-    • Average droop: ${(droopA.reduce((a,b)=>a+b)/n).toFixed(2)}/3<br><br>
-    
-    <strong>💡 Insight:</strong><br>
-    Sound exposure ${Math.abs(dbDroppCorr) > 0.5 ? 'significantly affects' : 'may affect'} plant health.
+  let msg = `
+📊 CORRELATION ANALYSIS (Pearson r-value)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• dB ↔ Droop (Plant A): r = ${corrDbDropp}
+  ${Math.abs(corrDbDropp) > 0.5 ? '✓ STRONG LINK - Sound affects plant health!' : '✗ Weak relationship'}
+  
+• Mood ↔ Droop: r = ${corrMood}
+  ${Math.abs(corrMood) > 0.5 ? '✓ Strong mood-droop link' : '✗ Weak link'}
+
+📈 TREND ANALYSIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Plant A Slope: ${reg.slope.toFixed(3)}/day
+  ${reg.slope > 0.05 ? '⚠️  WORSENING - Noise impact detected!' : '✓ Stable'}
+  
+• Avg Droop: Plant A ${aAvg}/3 | Plant B ${bAvg}/3
+• Avg Sound: Plant A ${aDb} dB | Plant B ${bDb} dB
+
+💡 KEY INSIGHT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Sound exposure ${Math.abs(corrDbDropp) > 0.5 ? 'SIGNIFICANTLY affects' : 'may affect'} plant health.
+Plant A (noisy) ${aAvg > bAvg ? 'droops MORE' : 'droops LESS'} than Plant B (quiet).
+
+Research by: Lavanya Sharda | A25305223171
+Institution: Amity University Mohali | B.Tech 3rd Year
   `;
   
-  alert(insights);
-}
+  alert(msg);
+};
+</script>
 
-
-<footer style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink); color: rgba(255,255,255,0.6); padding: 10px 24px; font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 1px; border-top: 1px solid var(--sage-dark); z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
-  <div>
-    <strong style="color: var(--sage);">Sonic Growth v2</strong> | Human-Nature Connection | Amity University Mohali
-  </div>
-  <div style="text-align: right;">
-    <strong style="color: var(--sage);">Lavanya Sharda</strong> | Roll: A25305223171 | B.Tech 3rd Year | 
-    <a href="https://github.com/lavan-NYA" style="color: var(--sage); text-decoration: none;">GitHub</a>
-  </div>
-</footer>
-
-</body>
 </html>
