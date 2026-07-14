@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonic Growth v4 | Lavanya Sharda (A25305223171) | Amity University Mohali</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --paper: #F7F4EE;
+  --paper-warm: #EEE9DF;
+  --ink: #111010;
+  --ink-soft: #2A2826;
+  --sage: #7A9E7E;
+  --sage-dark: #3A5C40;
+  --sage-pale: #B8D4BC;
+  --rust: #B85C3C;
+  --rule: #8A8478;
+  --ghost: rgba(17,16,16,0.06);
+  --ai-accent: #6BA583;
+  --alert: #D97757;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; scroll-behavior:smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ─── HEADER / NAV ─── */
+#site-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 200;
+  height: 44px;
+  background: var(--ink);
+  display: flex;
+  align-items: stretch;
+}
+
+.nav-wordmark {
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.nav-wordmark-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.nav-wordmark-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--sage);
+  flex-shrink: 0;
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+
+.nav-tab {
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  transition: color 0.2s;
+  text-decoration: none;
+  user-select: none;
+  border-bottom: 2px solid transparent;
+  position: relative;
+  top: 2px;
+}
+
+.nav-tab:hover { color: rgba(255,255,255,0.7); }
+.nav-tab.active { color: var(--sage); border-bottom-color: var(--sage); }
+
+.nav-right {
+  margin-left: auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+  border-left: 1px solid rgba(255,255,255,0.07);
+}
+
+/* ─── PAGES ─── */
+.page { display: none; padding-top: 44px; }
+.page.active { display: block; }
+
+/* ═══════════════════════════════
+   PAGE: DASHBOARD (REFACTORED FOR AI)
+═══════════════════════════════ */
+
+#page-dashboard {
+  padding: 44px 0 0 0;
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Data entry form */
+.entry-form {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  align-items: end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.form-group input {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--sage);
+  background: #fff;
+}
+
+.btn-primary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 24px;
+  background: var(--sage-dark);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--sage);
+}
+
+.btn-secondary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--ghost);
+  border-color: var(--ink-soft);
+}
+
+/* Charts grid */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.chart-card {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 24px;
+}
+
+.chart-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: var(--ink-soft);
+}
+
+.chart-container {
+  position: relative;
+  height: 240px;
+}
+
+/* Stats rows */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.stat-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--sage-dark);
+}
+
+.stat-trend {
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  color: var(--rule);
+}
+
+/* Data log table */
+.log-section {
+  margin-top: 32px;
+}
+
+.log-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: var(--ink-soft);
+}
+
+#logArea {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  overflow-x: auto;
+}
+
+.log-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+}
+
+.log-tbl thead {
+  background: var(--ghost);
+  border-bottom: 1px solid var(--rule);
+}
+
+.log-tbl th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: 0.5px;
+}
+
+.log-tbl td {
+  padding: 12px;
+  border-bottom: 1px solid var(--ghost);
+  color: var(--ink);
+}
+
+.log-tbl tbody tr:hover {
+  background: rgba(122, 158, 126, 0.04);
+}
+
+.empty {
+  padding: 32px;
+  text-align: center;
+  color: var(--rule);
+  font-style: italic;
+}
+
+/* ─── AI INSIGHTS SIDEBAR ─── */
+.ai-insights {
+  position: sticky;
+  top: 84px;
+  background: var(--sage-pale);
+  border: 2px solid var(--sage-dark);
+  padding: 20px;
+  height: fit-content;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ai-insights-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid var(--sage-dark);
+  padding-bottom: 12px;
+}
+
+.ai-icon {
+  width: 20px;
+  height: 20px;
+  background: var(--sage-dark);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.ai-insights-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+}
+
+.ai-content {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-content p {
+  margin: 0;
+}
+
+.ai-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-style: italic;
+  color: var(--sage-dark);
+}
+
+.ai-loading-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--sage-dark);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite;
+}
+
+.ai-loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.ai-loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.ai-insight-item {
+  background: rgba(255, 255, 255, 0.6);
+  border-left: 3px solid var(--sage-dark);
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.ai-insight-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 4px;
+}
+
+.ai-refresh-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  background: var(--sage-dark);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.ai-refresh-btn:hover {
+  background: var(--sage);
+}
+
+.ai-refresh-btn:disabled {
+  background: var(--rule);
+  cursor: not-allowed;
+}
+
+/* Alert styling */
+.ai-alert {
+  background: rgba(217, 119, 87, 0.15);
+  border-left-color: var(--alert);
+  color: var(--rust);
+}
+
+.ai-alert .ai-insight-label {
+  color: var(--rust);
+}
+
+/* ─── SETTINGS PAGE ─── */
+.settings-section {
+  max-width: 600px;
+  padding: 40px;
+  margin: 0 auto;
+}
+
+.settings-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  color: var(--ink-soft);
+}
+
+.settings-group {
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 24px;
+}
+
+.settings-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--ink-soft);
+  display: block;
+}
+
+.settings-input {
+  width: 100%;
+  font-family: 'Courier Prime', monospace;
+  font-size: 13px;
+  padding: 12px;
+  border: 1px solid var(--rule);
+  background: var(--paper-warm);
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.settings-input:focus {
+  outline: none;
+  border-color: var(--sage);
+  background: #fff;
+}
+
+.settings-hint {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  color: var(--rule);
+  margin-top: 8px;
+}
+
+.settings-note {
+  background: var(--sage-pale);
+  border-left: 3px solid var(--sage-dark);
+  padding: 16px;
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .ai-insights {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-container {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .entry-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .log-tbl {
+    font-size: 11px;
+  }
+  
+  .log-tbl th, .log-tbl td {
+    padding: 8px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="site-nav">
+  <div class="nav-wordmark">
+    <div class="nav-wordmark-title">Sonic Growth</div>
+    <div class="nav-wordmark-dot"></div>
+    <div style="margin-left: 16px; font-family: 'Barlow', sans-serif; font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 1px;">Lavanya Sharda | A25305223171</div>
+  </div>
+  <div class="nav-tabs">
+    <a href="#" class="nav-tab active" onclick="switchTab('dashboard', this); return false;">Dashboard</a>
+    <a href="#" class="nav-tab" onclick="switchTab('settings', this); return false;">Settings</a>
+  </div>
+  <div class="nav-right">v4 · AI Correlation Engine</div>
+</nav>
+
+<!-- DASHBOARD PAGE -->
+<div id="page-dashboard" class="page active">
+  <div class="dashboard-container">
+    <!-- Main content area -->
+    <div class="dashboard-main">
+      <!-- Data Entry Form -->
+      <div class="entry-form">
+        <div class="form-group">
+          <label for="dayNum">Day</label>
+          <input type="number" id="dayNum" value="1" min="1">
+        </div>
+        <div class="form-group">
+          <label for="aDroop">Plant A Droop (0–3)</label>
+          <input type="number" id="aDroop" value="0" min="0" max="3">
+        </div>
+        <div class="form-group">
+          <label for="aDb">Plant A dB</label>
+          <input type="number" id="aDb" value="80">
+        </div>
+        <div class="form-group">
+          <label for="aLux">Plant A Lux</label>
+          <input type="number" id="aLux" value="3000">
+        </div>
+        <div class="form-group">
+          <label for="bDroop">Plant B Droop (0–3)</label>
+          <input type="number" id="bDroop" value="0" min="0" max="3">
+        </div>
+        <div class="form-group">
+          <label for="bDb">Plant B dB</label>
+          <input type="number" id="bDb" value="48">
+        </div>
+        <div class="form-group">
+          <label for="bLux">Plant B Lux</label>
+          <input type="number" id="bLux" value="180">
+        </div>
+        <div class="form-group">
+          <label for="mood">Mood (1–5)</label>
+          <input type="number" id="mood" value="3" min="1" max="5">
+        </div>
+        <button class="btn-primary" onclick="logEntry()">Log Entry</button>
+        <button class="btn-secondary" onclick="loadSample()">Load Sample</button>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Plant Droop Over Time</div>
+          <div class="chart-container">
+            <canvas id="droopChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Sound Levels (dB)</div>
+          <div class="chart-container">
+            <canvas id="dbChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Observer Mood</div>
+          <div class="chart-container">
+            <canvas id="moodChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Plant A Avg Droop</div>
+          <div class="stat-value" id="aAvgDroop">—</div>
+          <div class="stat-trend" id="aDroopDelta"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plant B Avg Droop</div>
+          <div class="stat-value" id="bAvgDroop">—</div>
+          <div class="stat-trend" id="bDroopDelta"></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plant A Sonic Score</div>
+          <div class="stat-value" id="aScore">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plant B Sonic Score</div>
+          <div class="stat-value" id="bScore">—</div>
+        </div>
+      </div>
+
+      <!-- Data Log -->
+      <div class="log-section">
+        <div class="log-title">Entry Log</div>
+        <div id="logArea" class="empty">No entries yet</div>
+      </div>
+    </div>
+
+    <!-- AI Insights Sidebar -->
+    <div class="ai-insights">
+      <div class="ai-insights-header">
+        <div class="ai-icon">⚡</div>
+        <div class="ai-insights-title">AI Insights</div>
+      </div>
+      <div class="ai-content" id="aiContent">
+        <div style="color: var(--rule); font-style: italic; font-size: 12px;">
+          Log 3+ entries to generate AI-driven correlation analysis and patterns.
+        </div>
+      </div>
+      <button class="ai-refresh-btn" id="aiRefreshBtn" onclick="generateAIInsights()" disabled>
+        Generate Insights
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS PAGE -->
+<div id="page-settings" class="page">
+  <div class="settings-section">
+    <div class="settings-title">Settings</div>
+    
+    <div class="settings-group">
+      <label class="settings-label">Data Management</label>
+      <button class="btn-secondary" onclick="exportData()">Export Data (JSON)</button>
+      <button class="btn-secondary" onclick="clearData()" style="margin-top: 8px;">Clear All Data</button>
+    </div>
+
+    <div class="settings-note">
+      <strong>About AI Analysis:</strong> All pattern detection happens locally in your browser using mathematics (Pearson correlation, linear regression, forecasting). No data is sent anywhere. No API keys, no external services—your data stays on your device.
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── STATE & STORAGE ─── 
+let entries = [];
+let droopChart, dbChart, moodChart;
+const STORAGE_KEY = 'sonic_growth_entries';
+
+// Load from localStorage on startup
+function loadFromStorage() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    try {
+      entries = JSON.parse(stored);
+    } catch (e) {
+      console.error('Failed to load stored data:', e);
+    }
+  }
+}
+
+// Save to localStorage
+function saveToStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+}
+
+// ─── TAB SWITCHING ─── 
+function switchTab(name, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ─── CHARTS INITIALIZATION ─── 
+function initCharts() {
+  const base = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: 'rgba(17,16,16,0.04)' }, ticks: { font: { family: 'Courier Prime', size: 9 }, color: 'rgba(17,16,16,0.3)' } },
+      y: { grid: { color: 'rgba(17,16,16,0.04)' }, ticks: { font: { family: 'Courier Prime', size: 9 }, color: 'rgba(17,16,16,0.3)' } }
+    }
+  };
+
+  droopChart = new Chart(document.getElementById('droopChart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [
+        { label: 'A droop', data: [], borderColor: '#B85C3C', backgroundColor: 'rgba(184,92,60,0.07)', tension: 0.4, fill: true, pointRadius: 3, pointBackgroundColor: '#B85C3C' },
+        { label: 'B droop', data: [], borderColor: '#4A7050', backgroundColor: 'rgba(74,112,80,0.07)', tension: 0.4, fill: true, pointRadius: 3, pointBackgroundColor: '#4A7050' }
+      ]
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 0, max: 3 } } }
+  });
+
+  dbChart = new Chart(document.getElementById('dbChart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [
+        { label: 'A dB', data: [], borderColor: '#B85C3C', borderDash: [4, 3], tension: 0.3, pointRadius: 2, pointBackgroundColor: '#B85C3C', fill: false },
+        { label: 'B dB', data: [], borderColor: '#4A7050', borderDash: [4, 3], tension: 0.3, pointRadius: 2, pointBackgroundColor: '#4A7050', fill: false }
+      ]
+    },
+    options: base
+  });
+
+  moodChart = new Chart(document.getElementById('moodChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [{ label: 'mood', data: [], backgroundColor: 'rgba(74,112,80,0.5)', borderColor: '#4A7050', borderWidth: 1.5 }]
+    },
+    options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, min: 0, max: 5 } } }
+  });
+}
+
+// ─── DATA UPDATES ─── 
+function updateAll() {
+  const s = [...entries].sort((a, b) => a.day - b.day);
+  const labels = s.map(e => 'Day ' + e.day);
+
+  droopChart.data.labels = labels;
+  droopChart.data.datasets[0].data = s.map(e => e.aDroop);
+  droopChart.data.datasets[1].data = s.map(e => e.bDroop);
+  droopChart.update();
+
+  dbChart.data.labels = labels;
+  dbChart.data.datasets[0].data = s.map(e => e.aDb);
+  dbChart.data.datasets[1].data = s.map(e => e.bDb);
+  dbChart.update();
+
+  moodChart.data.labels = labels;
+  moodChart.data.datasets[0].data = s.map(e => e.mood);
+  moodChart.update();
+
+  if (!s.length) return;
+  const n = s.length;
+
+  const aAvg = (s.reduce((t, e) => t + e.aDroop, 0) / n).toFixed(1);
+  const bAvg = (s.reduce((t, e) => t + e.bDroop, 0) / n).toFixed(1);
+  document.getElementById('aAvgDroop').textContent = aAvg;
+  document.getElementById('bAvgDroop').textContent = bAvg;
+  document.getElementById('aDroopDelta').textContent = 'trend day 1→' + s[n-1].day + ': ' + s[0].aDroop + '→' + s[n-1].aDroop;
+  document.getElementById('bDroopDelta').textContent = 'trend day 1→' + s[n-1].day + ': ' + s[0].bDroop + '→' + s[n-1].bDroop;
+
+  const aDbAvg = s.reduce((t, e) => t + e.aDb, 0) / n;
+  const bDbAvg = s.reduce((t, e) => t + e.bDb, 0) / n;
+  const aScoreV = Math.round(((3 - +aAvg) / 3) * 60 + Math.max(0, (90 - aDbAvg) / 90) * 40);
+  const bScoreV = Math.round(((3 - +bAvg) / 3) * 60 + Math.max(0, (90 - bDbAvg) / 90) * 40);
+
+  document.getElementById('aScore').textContent = aScoreV;
+  document.getElementById('bScore').textContent = bScoreV;
+  document.getElementById('dayCount').textContent = n;
+
+  // Enable AI button if 3+ entries
+  document.getElementById('aiRefreshBtn').disabled = n < 3;
+
+  // Update log
+  updateLog(s);
+  
+  // Save to storage
+  saveToStorage();
+}
+
+function updateLog(s) {
+  if (!s.length) {
+    document.getElementById('logArea').innerHTML = '<div class="empty">No entries yet</div>';
+    return;
+  }
+  const colA = d => d === 0 ? '#4A7050' : d === 1 ? '#c9b84a' : d === 2 ? '#d07040' : '#B85C3C';
+  const rows = s.map(e => `<tr>
+    <td>Day ${e.day}</td>
+    <td style="color:${colA(e.aDroop)};font-weight:600">${e.aDroop}/3</td>
+    <td>${e.aDb} dB</td>
+    <td>${e.aLux} lux</td>
+    <td style="color:${colA(e.bDroop)};font-weight:600">${e.bDroop}/3</td>
+    <td>${e.bDb} dB</td>
+    <td>${e.bLux} lux</td>
+    <td>${e.mood}/5</td>
+  </tr>`).join('');
+  document.getElementById('logArea').innerHTML = `
+    <table class="log-tbl"><thead><tr>
+      <th>Day</th><th>A Droop</th><th>A dB</th><th>A Lux</th><th>B Droop</th><th>B dB</th><th>B Lux</th><th>Mood</th>
+    </tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function logEntry() {
+  const d = parseInt(document.getElementById('dayNum').value);
+  if (!d) { alert('Enter a day number.'); return; }
+  const entry = {
+    day: d,
+    aDroop: parseInt(document.getElementById('aDroop').value) || 0,
+    aDb: parseInt(document.getElementById('aDb').value) || 80,
+    aLux: parseInt(document.getElementById('aLux').value) || 3000,
+    bDroop: parseInt(document.getElementById('bDroop').value) || 0,
+    bDb: parseInt(document.getElementById('bDb').value) || 48,
+    bLux: parseInt(document.getElementById('bLux').value) || 180,
+    mood: parseInt(document.getElementById('mood').value) || 3
+  };
+  const idx = entries.findIndex(e => e.day === d);
+  idx >= 0 ? entries[idx] = entry : entries.push(entry);
+  updateAll();
+  document.getElementById('dayNum').value = d + 1;
+}
+
+function loadSample() {
+  entries = [
+    {day:1,aDroop:1,aDb:80,aLux:3200,bDroop:0,bDb:48,bLux:180,mood:3},
+    {day:2,aDroop:1,aDb:82,aLux:3000,bDroop:0,bDb:46,bLux:170,mood:3},
+    {day:3,aDroop:2,aDb:85,aLux:3500,bDroop:0,bDb:50,bLux:200,mood:4},
+    {day:4,aDroop:2,aDb:83,aLux:2800,bDroop:0,bDb:47,bLux:160,mood:4},
+    {day:5,aDroop:2,aDb:84,aLux:3100,bDroop:1,bDb:52,bLux:190,mood:3},
+    {day:6,aDroop:3,aDb:86,aLux:3400,bDroop:1,bDb:49,bLux:175,mood:2},
+    {day:7,aDroop:3,aDb:87,aLux:3600,bDroop:0,bDb:44,bLux:165,mood:4}
+  ];
+  updateAll();
+}
+
+// ─── PATTERN DETECTION AI (LOCAL, NO API) ─── 
+
+// Pearson Correlation: Measures how much two variables move together
+function pearsonCorr(x, y) {
+  const n = x.length;
+  const xm = x.reduce((a, b) => a + b, 0) / n;
+  const ym = y.reduce((a, b) => a + b, 0) / n;
+  const num = x.reduce((t, xi, i) => t + (xi - xm) * (y[i] - ym), 0);
+  const den = Math.sqrt(x.reduce((t, xi) => t + (xi - xm) ** 2, 0) * y.reduce((t, yi) => t + (yi - ym) ** 2, 0));
+  return den ? num / den : 0;
+}
+
+// Linear Regression: Detects trend (is plant improving or worsening?)
+function linearRegression(x, y) {
+  const n = x.length;
+  const sumX = x.reduce((a, b) => a + b, 0);
+  const sumY = y.reduce((a, b) => a + b, 0);
+  const sumXY = x.reduce((t, xi, i) => t + xi * y[i], 0);
+  const sumX2 = x.reduce((t, xi) => t + xi * xi, 0);
+  
+  const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  const intercept = (sumY - slope * sumX) / n;
+  
+  return { slope, intercept };
+}
+
+// Predictive Trend: Forecasts next 3 days
+function predictTrend(data) {
+  if (data.length < 3) return null;
+  
+  const x = Array.from({ length: data.length }, (_, i) => i);
+  const aDropps = data.map(e => e.aDroop);
+  const bDropps = data.map(e => e.bDroop);
+  
+  const aReg = linearRegression(x, aDropps);
+  const bReg = linearRegression(x, bDropps);
+  
+  const lastDay = data[data.length - 1].day;
+  const forecast = {
+    a: [],
+    b: [],
+    days: []
+  };
+  
+  for (let i = 1; i <= 3; i++) {
+    const dayIndex = data.length + i - 1;
+    forecast.a.push(Math.min(3, Math.max(0, aReg.slope * dayIndex + aReg.intercept)));
+    forecast.b.push(Math.min(3, Math.max(0, bReg.slope * dayIndex + bReg.intercept)));
+    forecast.days.push(lastDay + i);
+  }
+  
+  return {
+    forecast,
+    aSlope: aReg.slope,
+    bSlope: bReg.slope,
+    aDeteriorating: aReg.slope > 0.05,
+    bDeteriorating: bReg.slope > 0.05
+  };
+}
+
+// AI Pattern Detection: Analyzes data locally (NO external API, pure JavaScript)
+function generateAIInsights() {
+  const s = [...entries].sort((a, b) => a.day - b.day);
+  if (s.length < 3) {
+    alert('Need at least 3 entries for pattern analysis.');
+    return;
+  }
+
+  const aiContent = document.getElementById('aiContent');
+  aiContent.innerHTML = `
+    <div class="ai-loading">
+      <div class="ai-loading-dot"></div>
+      <div class="ai-loading-dot"></div>
+      <div class="ai-loading-dot"></div>
+      Analyzing patterns...
+    </div>
+  `;
+  document.getElementById('aiRefreshBtn').disabled = true;
+
+  // Simulate brief processing time for UX
+  setTimeout(() => {
+    // Calculate all statistics
+    const n = s.length;
+    const aAvg = (s.reduce((t, e) => t + e.aDroop, 0) / n).toFixed(2);
+    const bAvg = (s.reduce((t, e) => t + e.bDroop, 0) / n).toFixed(2);
+    const aDbAvg = (s.reduce((t, e) => t + e.aDb, 0) / n).toFixed(1);
+    const bDbAvg = (s.reduce((t, e) => t + e.bDb, 0) / n).toFixed(1);
+    const moodAvg = (s.reduce((t, e) => t + e.mood, 0) / n).toFixed(1);
+    
+    // Correlation analysis
+    const corrADbDroop = pearsonCorr(s.map(e => e.aDb), s.map(e => e.aDroop)).toFixed(3);
+    const corrBDbDroop = pearsonCorr(s.map(e => e.bDb), s.map(e => e.bDroop)).toFixed(3);
+    const corrMoodADroop = pearsonCorr(s.map(e => e.mood), s.map(e => e.aDroop)).toFixed(3);
+    
+    // Trend analysis
+    const trend = predictTrend(s);
+    const forecastA = trend.forecast.a.map(v => v.toFixed(1)).join(', ');
+    const forecastB = trend.forecast.b.map(v => v.toFixed(1)).join(', ');
+    
+    // Interpret correlation strength
+    const interpretCorr = (r) => {
+      const absR = Math.abs(r);
+      if (absR > 0.8) return 'very strong';
+      if (absR > 0.6) return 'strong';
+      if (absR > 0.4) return 'moderate';
+      if (absR > 0.2) return 'weak';
+      return 'negligible';
+    };
+    
+    // Generate insights
+    let insights = [];
+    
+    // Insight 1: Correlation pattern
+    if (Math.abs(corrADbDroop) > 0.5) {
+      insights.push(`📊 <strong>Sound-Droop Correlation:</strong> Plant A shows ${interpretCorr(corrADbDroop)} correlation (r=${corrADbDroop}) between dB levels and leaf droop. Higher noise = more wilting.`);
+    } else {
+      insights.push(`📊 <strong>Sound-Droop Correlation:</strong> Plant A shows ${interpretCorr(corrADbDroop)} correlation (r=${corrADbDroop}) between noise and droop. Weak relationship detected.`);
+    }
+    
+    // Insight 2: Plant comparison
+    if (aAvg > bAvg) {
+      const diff = (aAvg - bAvg).toFixed(2);
+      insights.push(`🌱 <strong>Plant Comparison:</strong> Plant A (noisy) droops more (${aAvg}/3) than Plant B (quiet, ${bAvg}/3). Difference: +${diff} droop. Sound exposure effect confirmed.`);
+    } else {
+      insights.push(`🌱 <strong>Plant Comparison:</strong> Plant B (quiet) actually droops more (${bAvg}/3) vs Plant A (${aAvg}/3). Noise may not be the main factor.`);
+    }
+    
+    // Insight 3: Trajectory
+    if (trend.aDeteriorating) {
+      insights.push(`📉 <strong>Plant A Trajectory:</strong> WORSENING. Droop increases ~${Math.abs(trend.aSlope).toFixed(3)} per day. Forecast: ${forecastA}/3. Consider reducing dB exposure immediately.`);
+    } else if (trend.aSlope < -0.05) {
+      insights.push(`📈 <strong>Plant A Trajectory:</strong> IMPROVING. Droop decreases ~${Math.abs(trend.aSlope).toFixed(3)} per day. Forecast: ${forecastA}/3. Keep current conditions.`);
+    } else {
+      insights.push(`➡️ <strong>Plant A Trajectory:</strong> STABLE. Minimal change over time. Forecast: ${forecastA}/3. Plant is adapting to environment.`);
+    }
+    
+    // Insight 4: Optimal dB range
+    const highDbDays = s.filter(e => e.aDb > 80).length;
+    const lowDbDays = s.filter(e => e.aDb < 60).length;
+    if (highDbDays > 0 && lowDbDays > 0) {
+      const highDbDroop = s.filter(e => e.aDb > 80).map(e => e.aDroop).reduce((a, b) => a + b, 0) / highDbDays;
+      const lowDbDroop = s.filter(e => e.aDb < 60).map(e => e.aDroop).reduce((a, b) => a + b, 0) / lowDbDays;
+      insights.push(`🎯 <strong>Optimal Range:</strong> Plant A at dB>80 droops more (avg ${highDbDroop.toFixed(1)}) than at dB<60 (avg ${lowDbDroop.toFixed(1)}). Recommendation: Keep noise <60 dB.`);
+    }
+    
+    // Insight 5: Observer mood correlation
+    if (Math.abs(corrMoodADroop) > 0.5) {
+      insights.push(`😊 <strong>Mood-Droop Correlation:</strong> Your mood (avg ${moodAvg}/5) shows ${interpretCorr(corrMoodADroop)} correlation (r=${corrMoodADroop}) with plant droop. Observer wellbeing may reflect plant stress.`);
+    }
+    
+    // Build HTML output
+    let html = `<div class="ai-insight-item">
+      <div class="ai-insight-label">🤖 Pattern Analysis</div>`;
+    
+    insights.forEach(insight => {
+      html += `<p>${insight}</p>`;
+    });
+    
+    html += `</div>`;
+    
+    // Add alerts
+    if (Math.abs(corrADbDroop) > 0.7) {
+      html += `
+      <div class="ai-insight-item ai-alert">
+        <div class="ai-insight-label">⚠️ Very Strong Sound-Droop Link</div>
+        <p>r = ${corrADbDroop} — Sound exposure is heavily affecting plant health. This is your dominant pattern.</p>
+      </div>`;
+    }
+    
+    if (trend.aDeteriorating) {
+      html += `
+      <div class="ai-insight-item ai-alert">
+        <div class="ai-insight-label">📉 Plant A Declining Fast</div>
+        <p>Slope: ${trend.aSlope.toFixed(3)}/day. At this rate, plant reaches critical droop within ${Math.ceil(3 / trend.aSlope)} days.</p>
+      </div>`;
+    }
+    
+    // Forecast card
+    html += `
+      <div class="ai-insight-item">
+        <div class="ai-insight-label">🔮 3-Day Forecast</div>
+        <p><strong>Plant A:</strong> ${forecastA}/3</p>
+        <p><strong>Plant B:</strong> ${forecastB}/3</p>
+      </div>`;
+    
+    aiContent.innerHTML = html;
+    document.getElementById('aiRefreshBtn').disabled = false;
+  }, 500);
+}
+
+// ─── DATA MANAGEMENT ─── 
+function exportData() {
+  const json = JSON.stringify(entries, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sonic-growth-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function clearData() {
+  if (confirm('Clear all entries? This cannot be undone.')) {
+    entries = [];
+    localStorage.removeItem(STORAGE_KEY);
+    updateAll();
+  }
+}
+
+// ─── INITIALIZATION ─── 
+window.addEventListener('load', () => {
+  loadFromStorage();
+  initCharts();
+  updateAll();
+});
+</script>
+<footer style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink); color: rgba(255,255,255,0.6); padding: 10px 24px; font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 1px; border-top: 1px solid var(--sage-dark); z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+  <div>
+    <strong style="color: var(--sage);">Sonic Growth v4</strong> | AI Pattern Detection | Amity University Mohali
+  </div>
+  <div style="text-align: right;">
+    <strong style="color: var(--sage);">Lavanya Sharda</strong> | Roll: A25305223171 | B.Tech 3rd Year | 
+    <a href="https://github.com/lavan-NYA" style="color: var(--sage); text-decoration: none;">GitHub</a>
+  </div>
+</footer>
